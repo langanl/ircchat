@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 284
-  Top = 222
-  Width = 351
-  Height = 186
+  Left = 152
+  Top = 142
+  Width = 515
+  Height = 256
   BorderIcons = [biSystemMenu]
   Caption = 'Envio de mensagens'
   Color = clBtnFace
@@ -15,18 +15,20 @@ object Form1: TForm1
   OldCreateOrder = False
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnPaint = FormPaint
   DesignSize = (
-    343
-    152)
+    507
+    222)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtn1: TBitBtn
-    Left = 8
-    Top = 106
-    Width = 25
+    Left = 104
+    Top = 5
+    Width = 89
     Height = 25
     Hint = 'Configura'#231#227'o'
     Anchors = [akLeft, akBottom]
+    Caption = 'Configurar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -52,8 +54,8 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 133
-    Width = 343
+    Top = 203
+    Width = 507
     Height = 19
     Panels = <
       item
@@ -64,34 +66,59 @@ object Form1: TForm1
       end>
   end
   object Button5: TButton
-    Left = 40
-    Top = 106
-    Width = 25
+    Left = 8
+    Top = 5
+    Width = 89
     Height = 25
+    Hint = 'Conectar'
     Anchors = [akLeft, akBottom]
-    Caption = 'T'
+    Caption = 'Conectar'
     TabOrder = 2
     OnClick = Button5Click
   end
   object Edit1: TEdit
-    Left = 72
-    Top = 106
-    Width = 259
+    Left = 96
+    Top = 176
+    Width = 321
     Height = 21
     Anchors = [akLeft, akRight, akBottom]
+    Enabled = False
     TabOrder = 3
     OnKeyPress = Memo2KeyPress
   end
   object Memo2: TRichEdit
     Left = 7
-    Top = 8
-    Width = 325
-    Height = 89
+    Top = 40
+    Width = 490
+    Height = 127
     Anchors = [akLeft, akTop, akRight, akBottom]
-    Lines.Strings = (
-      'Memo2')
+    ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 4
+    OnChange = Memo2Change
+  end
+  object ComboBox1: TComboBox
+    Left = 6
+    Top = 176
+    Width = 83
+    Height = 19
+    AutoComplete = False
+    Style = csOwnerDrawFixed
+    Anchors = [akRight, akBottom]
+    Enabled = False
+    ItemHeight = 13
+    TabOrder = 5
+  end
+  object Button1: TButton
+    Left = 424
+    Top = 174
+    Width = 75
+    Height = 25
+    Anchors = [akRight, akBottom]
+    Caption = 'Enviar'
+    Enabled = False
+    TabOrder = 6
+    OnClick = ButtonEnviarClick
   end
   object IdIRC1: TIdIRC
     OnStatus = IdIRC1Status
@@ -119,7 +146,6 @@ object Form1: TForm1
     OnExceptionListReceived = IdIRC1ExceptionListReceived
     OnInvitationListReceived = IdIRC1InvitationListReceived
     OnServerListReceived = IdIRC1ServerListReceived
-    OnNicknamesListReceived = IdIRC1NicknamesListReceived
     OnServerUsersListReceived = IdIRC1ServerUsersListReceived
     OnServerStatsReceived = IdIRC1ServerStatsReceived
     OnKnownServersListReceived = IdIRC1KnownServersListReceived
@@ -135,17 +161,23 @@ object Form1: TForm1
     OnKill = IdIRC1Kill
     OnService = IdIRC1Service
     OnRaw = IdIRC1Raw
-    Left = 72
-    Top = 104
+    Left = 88
+    Top = 32
   end
   object Timer1: TTimer
-    Interval = 5000
+    Enabled = False
+    Interval = 60000
     OnTimer = Timer1Timer
-    Left = 288
-    Top = 16
+    Left = 152
+    Top = 32
   end
   object IdAntiFreeze1: TIdAntiFreeze
-    Left = 104
-    Top = 104
+    Left = 120
+    Top = 32
+  end
+  object Timer2: TTimer
+    Interval = 5000
+    Left = 200
+    Top = 32
   end
 end
