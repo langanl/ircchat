@@ -111,11 +111,11 @@ ProjectLang=
 RootDir=C:\Arquivos de programas\Borland\Delphi7\Bin\
 [Version Info]
 IncludeVerInfo=1
-AutoIncBuild=0
-MajorVer=1
+AutoIncBuild=1
+MajorVer=2
 MinorVer=0
 Release=0
-Build=0
+Build=6
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=
-FileVersion=1.0.0.0
+FileVersion=2.0.0.6
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -136,3 +136,18 @@ ProductVersion=1.0.0.0
 Comments=
 [Excluded Packages]
 c:\borland\delphi7\Bin\dclindy70.bpl=Internet Direct (Indy) for D7 Property and Component Editors
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+[HistoryLists\hlSearchPath]
+Count=1
+Item0=C:\projetos\temp\bpl
+[HistoryLists\hlUnitOutputDirectory]
+Count=1
+Item0=C:\projetos\temp\dcu
+[HistoryLists\hlBPLOutput]
+Count=1
+Item0=C:\projetos\temp\bpl
+[HistoryLists\hlDCPOutput]
+Count=1
+Item0=C:\projetos\temp\dcp

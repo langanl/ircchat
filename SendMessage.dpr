@@ -4,8 +4,7 @@ program SendMessage;
 uses
   Forms,
   Unit1 in 'Unit1.pas' {Form1},
-  UnitConfig in 'UnitConfig.pas' {FormConfig},
-  Unit2 in 'Unit2.pas' {Form2};
+  UnitConfig in 'UnitConfig.pas' {FormConfig};
 
 {$R *.res}
 
