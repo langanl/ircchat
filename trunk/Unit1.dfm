@@ -1,8 +1,8 @@
 object Form1: TForm1
   Left = 152
-  Top = 142
-  Width = 515
-  Height = 256
+  Top = 223
+  Width = 555
+  Height = 308
   BorderIcons = [biSystemMenu]
   Caption = 'Envio de mensagens'
   Color = clBtnFace
@@ -14,20 +14,18 @@ object Form1: TForm1
   KeyPreview = True
   OldCreateOrder = False
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
-  OnPaint = FormPaint
+  OnDestroy = TimerDisconect
   DesignSize = (
-    507
-    222)
+    547
+    274)
   PixelsPerInch = 96
   TextHeight = 13
-  object BitBtn1: TBitBtn
+  object ButtonConfigurar: TBitBtn
     Left = 104
-    Top = 5
+    Top = 8
     Width = 89
     Height = 25
     Hint = 'Configura'#231#227'o'
-    Anchors = [akLeft, akBottom]
     Caption = 'Configurar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -36,7 +34,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    OnClick = BitBtn1Click
+    OnClick = ButtonConfigurarClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -54,8 +52,8 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 203
-    Width = 507
+    Top = 255
+    Width = 547
     Height = 19
     Panels = <
       item
@@ -65,60 +63,88 @@ object Form1: TForm1
         Width = 50
       end>
   end
-  object Button5: TButton
+  object ButtonConectar: TButton
     Left = 8
-    Top = 5
+    Top = 8
     Width = 89
     Height = 25
-    Hint = 'Conectar'
-    Anchors = [akLeft, akBottom]
     Caption = 'Conectar'
     TabOrder = 2
-    OnClick = Button5Click
+    OnClick = ButtonConnect
   end
-  object Edit1: TEdit
-    Left = 96
-    Top = 176
-    Width = 321
-    Height = 21
-    Anchors = [akLeft, akRight, akBottom]
-    Enabled = False
-    TabOrder = 3
-    OnKeyPress = Memo2KeyPress
-  end
-  object Memo2: TRichEdit
-    Left = 7
-    Top = 40
-    Width = 490
-    Height = 127
+  object Panel1: TPanel
+    Left = 8
+    Top = 39
+    Width = 529
+    Height = 211
     Anchors = [akLeft, akTop, akRight, akBottom]
-    ReadOnly = True
-    ScrollBars = ssVertical
-    TabOrder = 4
-    OnChange = Memo2Change
-  end
-  object ComboBox1: TComboBox
-    Left = 6
-    Top = 176
-    Width = 83
-    Height = 19
-    AutoComplete = False
-    Style = csOwnerDrawFixed
-    Anchors = [akRight, akBottom]
-    Enabled = False
-    ItemHeight = 13
-    TabOrder = 5
-  end
-  object Button1: TButton
-    Left = 424
-    Top = 174
-    Width = 75
-    Height = 25
-    Anchors = [akRight, akBottom]
-    Caption = 'Enviar'
-    Enabled = False
-    TabOrder = 6
-    OnClick = ButtonEnviarClick
+    BevelOuter = bvNone
+    Caption = 'Panel1'
+    TabOrder = 3
+    object Splitter1: TSplitter
+      Left = 0
+      Top = 173
+      Width = 529
+      Height = 3
+      Cursor = crVSplit
+      Align = alBottom
+      Color = clActiveCaption
+      ParentColor = False
+    end
+    object Panel2: TPanel
+      Left = 0
+      Top = 176
+      Width = 529
+      Height = 35
+      Align = alBottom
+      BevelOuter = bvNone
+      Constraints.MinHeight = 35
+      TabOrder = 0
+      DesignSize = (
+        529
+        35)
+      object ComboBoxNames: TComboBox
+        Left = 2
+        Top = 10
+        Width = 105
+        Height = 19
+        AutoComplete = False
+        Style = csOwnerDrawFixed
+        ItemHeight = 13
+        TabOrder = 0
+      end
+      object ButtonSend: TButton
+        Left = 453
+        Top = 9
+        Width = 75
+        Height = 23
+        Anchors = [akTop, akRight]
+        Caption = 'Enviar'
+        TabOrder = 1
+        OnClick = ButtonSendClick
+      end
+      object EditSend: TMemo
+        Left = 112
+        Top = 9
+        Width = 331
+        Height = 21
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        TabOrder = 2
+        OnKeyDown = EditSendKeyUp
+        OnKeyPress = EditSendKeyPress
+      end
+    end
+    object LogRecebidas: TRichEdit
+      Left = 0
+      Top = 0
+      Width = 529
+      Height = 173
+      Align = alClient
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 1
+      OnChange = LogRecebidasChange
+    end
   end
   object IdIRC1: TIdIRC
     OnStatus = IdIRC1Status
@@ -131,34 +157,16 @@ object Form1: TForm1
     ExceptionReply.Code = '500'
     ExceptionReply.Text.Strings = (
       'Unknown Internal Error')
-    OnBeforeCommandHandler = IdIRC1BeforeCommandHandler
     UserMode = []
     OnPrivateMessage = IdIRC1PrivateMessage
     OnNotice = IdIRC1Notice
     OnIsOnIRC = IdIRC1IsOnIRC
     OnJoin = IdIRC1Join
     OnPart = IdIRC1Part
-    OnKick = IdIRC1Kick
     OnMOTD = IdIRC1MOTD
-    OnTrace = IdIRC1Trace
-    OnInviting = IdIRC1Inviting
-    OnInvite = IdIRC1Invite
-    OnExceptionListReceived = IdIRC1ExceptionListReceived
-    OnInvitationListReceived = IdIRC1InvitationListReceived
-    OnServerListReceived = IdIRC1ServerListReceived
-    OnServerUsersListReceived = IdIRC1ServerUsersListReceived
-    OnServerStatsReceived = IdIRC1ServerStatsReceived
-    OnKnownServersListReceived = IdIRC1KnownServersListReceived
-    OnAdminInfoReceived = IdIRC1AdminInfoReceived
     OnUserInfoReceived = IdIRC1UserInfoReceived
-    OnChannelMode = IdIRC1ChannelMode
-    OnUserMode = IdIRC1UserMode
-    OnCTCPReply = IdIRC1CTCPReply
     OnServerError = IdIRC1ServerError
-    OnNicknameError = IdIRC1NicknameError
-    OnKillError = IdIRC1KillError
     OnNicknameChange = IdIRC1NicknameChange
-    OnKill = IdIRC1Kill
     OnService = IdIRC1Service
     OnRaw = IdIRC1Raw
     Left = 88
@@ -166,18 +174,13 @@ object Form1: TForm1
   end
   object Timer1: TTimer
     Enabled = False
-    Interval = 60000
-    OnTimer = Timer1Timer
+    Interval = 30000
+    OnTimer = TimerDisconect
     Left = 152
     Top = 32
   end
   object IdAntiFreeze1: TIdAntiFreeze
     Left = 120
-    Top = 32
-  end
-  object Timer2: TTimer
-    Interval = 5000
-    Left = 200
     Top = 32
   end
 end
