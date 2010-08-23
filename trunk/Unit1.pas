@@ -22,10 +22,11 @@ type
     Panel1: TPanel;
     Splitter1: TSplitter;
     Panel2: TPanel;
-    LogRecebidas: TRichEdit;
     ComboBoxNames: TComboBox;
     ButtonSend: TButton;
     EditSend: TMemo;
+    Panel3: TPanel;
+    LogRecebidas: TRichEdit;
     procedure ButtonSendClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure EditSendKeyPress(Sender: TObject; var Key: Char);
@@ -79,7 +80,7 @@ type
 
   public
     { Public declarations }
-    procedure Say(ATarget, Texto: string);    
+    procedure Say(ATarget, Texto: string);
   end;
 
 var
@@ -166,7 +167,8 @@ begin
 
   ATarget := StringReplace(ATarget,'@','',[rfReplaceAll]);
   ATarget := StringReplace(ATarget,'+','',[rfReplaceAll]);
-  
+  AMsg := StringReplace(AMsg, #13, '',[rfReplaceAll]);
+  AMsg := StringReplace(AMsg, #10, ' ',[rfReplaceAll]);
   AMsg := Format('[%s] %s',[IdIRC1.RealName, Texto]);
   IdIRC1.Raw(Format('PRIVMSG %s :%s', [ATarget, AMsg]));
 
@@ -175,11 +177,10 @@ begin
   else
   begin
     LogRecebidas.Lines.Add(Format('[%s] <%s>: %s',[IdIRC1.RealName, ATarget, Texto]));
-
   end;
 
   Timer1.Enabled := False;
-  Timer1.Enabled := True;  
+  Timer1.Enabled := True;
 end;
 
 procedure TForm1.WaitFor(var BoolVar: Boolean; Timeout: Cardinal = 5);
@@ -193,6 +194,7 @@ end;
 
 procedure TForm1.ButtonSendClick(Sender: TObject);
 begin
+  EditSend.SetFocus();
   if not IdIRC1.Connected then
   begin
     ConfiguraIRC();
@@ -203,7 +205,7 @@ begin
   WaitFor(FInChannel);
   try
     Say(ComboBoxNames.Text, EditSend.Text);
-    EditSend.Clear();
+    EditSend.Lines.Clear();
   except
     MessageDlg('Erro ao tentar entrar no canal: ' + idIRC1.Host, mtError, [mbOK], 0);
     Exit;
@@ -213,7 +215,10 @@ end;
 procedure TForm1.ConfiguraIRC();
 var
   Ini: TCustomIniFile;
+  //old: boolean;
 begin
+  //old := Timer1.Enabled;
+  //Timer1.Enabled := False;
   Ini := TMemIniFile.Create(ExtractFilePath(ParamStr(0)) + '\config.ini');
   try
     IdIRC1.Host := ini.readstring('irc', 'host', '200.142.160.127');
@@ -223,10 +228,12 @@ begin
     IdIRC1.AltNickname := ini.readstring('irc', 'altnick', '');
     IdIRC1.RealName := ini.readstring('irc', 'realname', '');
     IRCChannel := ini.readstring('irc', 'channel', '');
+    //Timer1.Interval := ini.ReadInteger('irc', 'timetodisconnect', 3000);
     Ini.ReadSection('Usuarios', Users);
   finally
     Ini.Free();
   end;
+  //Timer1.Enabled := old;
   StatusBar1.Panels[1].Text := format('%s : %d - [%s]', [IdIRC1.Host, IdIRC1.Port, IdIRC1.RealName]);
 end;
 
@@ -238,16 +245,21 @@ begin
   ConfiguraIRC();
   FInChannel := False;
   ComboBoxNames.Items.Text := '#'+IRCChannel;
-  ComboBoxNames.ItemIndex := 0;  
+  ComboBoxNames.ItemIndex := 0;
+  Connect();  
 end;
 
 procedure TForm1.EditSendKeyPress(Sender: TObject; var Key: Char);
 begin
   if key = #27 then
-    LogRecebidas.Lines.clear();
-    
+    EditSend.Lines.clear();
+
   if key = #13 then
+  begin
     ButtonSendClick(nil);
+    EditSend.Lines.clear();
+    Key := #0;
+  end;
  
 end;
 
@@ -432,7 +444,12 @@ begin
 end;
 
 procedure TForm1.TimerDisconect(Sender: TObject);
+var
+  T: boolean;
 begin
+  FInChannel := False;
+  IdIRC1.ListChannelNicknames('#'+IRCChannel);
+  WaitFor(T, 5);
   Disconnect();
 end;
 
@@ -446,8 +463,10 @@ begin
 
   ButtonConectar.Caption := 'Conectar';
   ButtonConectar.OnClick := ButtonConnect;
+  {
   ComboBoxNames.Items.Text := '#' + IRCChannel;
   ComboBoxNames.ItemIndex := 0;
+  }
 end;
 
 procedure TForm1.LogRecebidasChange(Sender: TObject);
@@ -459,9 +478,9 @@ procedure TForm1.EditSendKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   StatusBar1.Panels[0].Text :=
-    format('Resta: %d', [(length(EditSend.Text) - 255)*-1]);
+    Format('Resta: %d', [(length(EditSend.Lines.Text) - 255)*-1]);
 
-  ButtonSend.Enabled := (Length(EditSend.Text) >0);// and IdIRC1.Connected;
+  ButtonSend.Enabled := (Length(EditSend.Lines.Text) >0);// and IdIRC1.Connected;
 end;
 
 procedure TForm1.ButtonConnect(Sender: TObject);
