@@ -3,6 +3,7 @@ object Form1: TForm1
   Top = 223
   Width = 555
   Height = 308
+  ActiveControl = EditSend
   BorderIcons = [biSystemMenu]
   Caption = 'Envio de mensagens'
   Color = clBtnFace
@@ -21,7 +22,7 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object ButtonConfigurar: TBitBtn
-    Left = 104
+    Left = 8
     Top = 8
     Width = 89
     Height = 25
@@ -64,12 +65,13 @@ object Form1: TForm1
       end>
   end
   object ButtonConectar: TButton
-    Left = 8
+    Left = 176
     Top = 8
     Width = 89
     Height = 25
     Caption = 'Conectar'
     TabOrder = 2
+    Visible = False
     OnClick = ButtonConnect
   end
   object Panel1: TPanel
@@ -130,20 +132,31 @@ object Form1: TForm1
         Height = 21
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 2
-        OnKeyDown = EditSendKeyUp
         OnKeyPress = EditSendKeyPress
+        OnKeyUp = EditSendKeyUp
       end
     end
-    object LogRecebidas: TRichEdit
+    object Panel3: TPanel
       Left = 0
       Top = 0
       Width = 529
       Height = 173
       Align = alClient
-      ReadOnly = True
-      ScrollBars = ssVertical
       TabOrder = 1
-      OnChange = LogRecebidasChange
+      DesignSize = (
+        529
+        173)
+      object LogRecebidas: TRichEdit
+        Left = 0
+        Top = 0
+        Width = 529
+        Height = 162
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 0
+        OnChange = LogRecebidasChange
+      end
     end
   end
   object IdIRC1: TIdIRC
