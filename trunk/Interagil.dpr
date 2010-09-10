@@ -1,5 +1,5 @@
 
-program SendMessage;
+program Interagil;
 
 uses
   Forms,

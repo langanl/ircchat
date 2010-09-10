@@ -4,15 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, IniFiles;
+  Dialogs, StdCtrls, Buttons, IniFiles, ExtCtrls;
 
 type
   TFormConfig = class(TForm)
     GroupBox1: TGroupBox;
-    Label1: TLabel;
-    Edit1: TEdit;
-    Label2: TLabel;
-    Edit2: TEdit;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn4: TBitBtn;
@@ -28,8 +24,14 @@ type
     Edit5: TEdit;
     Edit6: TEdit;
     BitBtn6: TBitBtn;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
     Label4: TLabel;
     Edit8: TEdit;
+    CheckBox1: TCheckBox;
     procedure BitBtn4Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -38,6 +40,8 @@ type
     procedure Edit1Change(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     Started: Boolean;
     procedure Carregar;
@@ -67,9 +71,9 @@ begin
     Edit2.Text := IntToStr(ini.ReadInteger('irc', 'port', 8000));
     Edit3.Text := ini.readstring('irc', 'nick', '');
     Edit4.Text := ini.readstring('irc', 'password', 'sesc');
-    Edit5.Text := ini.readstring('irc', 'altnick', 'DR-Unidade');
-    Edit6.Text := ini.readstring('irc', 'username', 'DR-Unidade');
-    Edit7.Text := ini.readstring('irc', 'realname', 'DR-Unidade');
+    Edit5.Text := ini.readstring('irc', 'altnick', '');
+    Edit6.Text := ini.readstring('irc', 'username', '');
+    Edit7.Text := ini.readstring('irc', 'realname', '');
     Edit8.Text := ini.readstring('irc', 'channel', 'ip-sesc');
     Ini.ReadSection('Usuarios', ListBox1.Items);
     if Listbox1.Items.Count = 0 then
@@ -79,6 +83,11 @@ begin
       Listbox1.Items.Add('Antena03');
       Listbox1.Items.Add('Antena04');
       Listbox1.Items.Add('Antena05');
+      Listbox1.Items.Add('Antena06');
+      Listbox1.Items.Add('Antena07');
+      Listbox1.Items.Add('Antena08');
+      Listbox1.Items.Add('Antena09');
+      Listbox1.Items.Add('Antena10');
     end;
   finally
     Ini.Free();
@@ -174,6 +183,21 @@ begin
   newUser := InputBox('Novo Usuario', 'Usuario', '');
   if newUser <> '' then
     ListBox1.Items.Add(newUser);
+end;
+
+procedure TFormConfig.CheckBox1Click(Sender: TObject);
+begin
+  Panel1.Enabled := CheckBox1.Checked;
+end;
+
+procedure TFormConfig.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  if Length(Edit7.Text)<5 then
+  begin
+    ShowMessage('O usuário deve conter mais que 4 letras');
+    CanClose := False;
+  end;
 end;
 
 end.
