@@ -13,6 +13,7 @@ object FormConfig: TFormConfig
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -23,69 +24,94 @@ object FormConfig: TFormConfig
     Height = 145
     Caption = ' Servidor '
     TabOrder = 0
-    object Label1: TLabel
-      Left = 16
-      Top = 24
-      Width = 39
-      Height = 13
-      Caption = 'Servidor'
-    end
-    object Label2: TLabel
-      Left = 24
-      Top = 56
-      Width = 25
-      Height = 13
-      Caption = 'Porta'
-    end
     object Label3: TLabel
-      Left = 32
-      Top = 88
-      Width = 16
+      Left = 24
+      Top = 21
+      Width = 36
       Height = 13
-      Caption = 'DR'
+      Caption = 'Usuario'
     end
-    object Label4: TLabel
-      Left = 32
-      Top = 117
-      Width = 27
-      Height = 13
-      Caption = 'Canal'
-    end
-    object Edit1: TEdit
+    object Edit7: TEdit
       Left = 72
       Top = 16
       Width = 121
       Height = 21
       TabOrder = 0
-      Text = 'Edit1'
-      OnChange = Edit1Change
-    end
-    object Edit2: TEdit
-      Left = 72
-      Top = 48
-      Width = 121
-      Height = 21
-      TabOrder = 1
-      Text = 'Edit2'
-      OnChange = Edit1Change
-    end
-    object Edit7: TEdit
-      Left = 72
-      Top = 80
-      Width = 121
-      Height = 21
-      TabOrder = 2
       Text = 'Edit7'
       OnChange = Edit1Change
     end
-    object Edit8: TEdit
-      Left = 72
-      Top = 112
-      Width = 121
-      Height = 21
-      TabOrder = 3
-      Text = 'Edit8'
-      OnChange = Edit1Change
+    object Panel1: TPanel
+      Left = 8
+      Top = 48
+      Width = 201
+      Height = 89
+      Ctl3D = False
+      Enabled = False
+      ParentCtl3D = False
+      TabOrder = 1
+      object Label1: TLabel
+        Left = 13
+        Top = 14
+        Width = 39
+        Height = 13
+        Caption = 'Servidor'
+      end
+      object Label2: TLabel
+        Left = 30
+        Top = 36
+        Width = 25
+        Height = 13
+        Caption = 'Porta'
+      end
+      object Label4: TLabel
+        Left = 30
+        Top = 60
+        Width = 27
+        Height = 13
+        Caption = 'Canal'
+      end
+      object Edit1: TEdit
+        Left = 64
+        Top = 8
+        Width = 121
+        Height = 21
+        Ctl3D = True
+        ParentCtl3D = False
+        TabOrder = 0
+        Text = 'Edit1'
+        OnChange = Edit1Change
+      end
+      object Edit2: TEdit
+        Left = 64
+        Top = 32
+        Width = 121
+        Height = 21
+        Ctl3D = True
+        ParentCtl3D = False
+        TabOrder = 1
+        Text = 'Edit2'
+        OnChange = Edit1Change
+      end
+      object Edit8: TEdit
+        Left = 64
+        Top = 58
+        Width = 121
+        Height = 21
+        Ctl3D = True
+        ParentCtl3D = False
+        TabOrder = 2
+        Text = 'Edit8'
+        OnChange = Edit1Change
+      end
+    end
+    object CheckBox1: TCheckBox
+      Left = 16
+      Top = 40
+      Width = 49
+      Height = 17
+      Caption = 'Alterar'
+      TabOrder = 2
+      OnClick = CheckBox1Click
     end
   end
   object BitBtn1: TBitBtn

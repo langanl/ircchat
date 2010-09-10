@@ -21,6 +21,15 @@ object Form1: TForm1
     274)
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 504
+    Top = 12
+    Width = 32
+    Height = 13
+    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
+    Caption = 'Label1'
+  end
   object ButtonConfigurar: TBitBtn
     Left = 8
     Top = 8
@@ -65,7 +74,7 @@ object Form1: TForm1
       end>
   end
   object ButtonConectar: TButton
-    Left = 176
+    Left = 248
     Top = 8
     Width = 89
     Height = 25
@@ -159,6 +168,14 @@ object Form1: TForm1
       end
     end
   end
+  object Button1: TButton
+    Left = 160
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 4
+  end
   object IdIRC1: TIdIRC
     OnStatus = IdIRC1Status
     OnDisconnected = IdIRC1Disconnected
@@ -176,11 +193,10 @@ object Form1: TForm1
     OnIsOnIRC = IdIRC1IsOnIRC
     OnJoin = IdIRC1Join
     OnPart = IdIRC1Part
-    OnMOTD = IdIRC1MOTD
+    OnServerUsersListReceived = IdIRC1ServerUsersListReceived
     OnUserInfoReceived = IdIRC1UserInfoReceived
     OnServerError = IdIRC1ServerError
     OnNicknameChange = IdIRC1NicknameChange
-    OnService = IdIRC1Service
     OnRaw = IdIRC1Raw
     Left = 88
     Top = 32
