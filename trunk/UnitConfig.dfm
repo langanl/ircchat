@@ -13,7 +13,6 @@ object FormConfig: TFormConfig
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -131,8 +130,8 @@ object FormConfig: TFormConfig
     Width = 80
     Height = 23
     Caption = 'Cancelar'
-    ModalResult = 2
     TabOrder = 2
+    OnClick = BitBtn2Click
     NumGlyphs = 2
   end
   object BitBtn4: TBitBtn

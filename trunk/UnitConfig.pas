@@ -41,14 +41,15 @@ type
     procedure ListBox1Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure BitBtn2Click(Sender: TObject);
   private
     Started: Boolean;
+    Closing: Boolean;
     procedure Carregar;
     procedure CarregarConfig(ConfigFile: string);
-    procedure Salvar;
+    function Salvar: boolean;
     procedure SalvarConfig;
-
+    procedure Cancelar;
     { Private declarations }
   public
     { Public declarations }
@@ -72,8 +73,8 @@ begin
     Edit3.Text := ini.readstring('irc', 'nick', '');
     Edit4.Text := ini.readstring('irc', 'password', 'sesc');
     Edit5.Text := ini.readstring('irc', 'altnick', '');
-    Edit6.Text := ini.readstring('irc', 'username', '');
-    Edit7.Text := ini.readstring('irc', 'realname', '');
+    Edit6.Text := ini.readstring('irc', 'username', 'Dummy');
+    Edit7.Text := ini.readstring('irc', 'realname', 'Dummy');
     Edit8.Text := ini.readstring('irc', 'channel', 'ip-sesc');
     Ini.ReadSection('Usuarios', ListBox1.Items);
     if Listbox1.Items.Count = 0 then
@@ -83,11 +84,11 @@ begin
       Listbox1.Items.Add('Antena03');
       Listbox1.Items.Add('Antena04');
       Listbox1.Items.Add('Antena05');
-      Listbox1.Items.Add('Antena06');
+     {Listbox1.Items.Add('Antena06');
       Listbox1.Items.Add('Antena07');
       Listbox1.Items.Add('Antena08');
       Listbox1.Items.Add('Antena09');
-      Listbox1.Items.Add('Antena10');
+      Listbox1.Items.Add('Antena10');}
     end;
   finally
     Ini.Free();
@@ -118,10 +119,19 @@ begin
 end;
 
 
-procedure TFormConfig.Salvar();
+function TFormConfig.Salvar(): boolean;
 begin
-  SalvarConfig();
-  Close();
+  Result := False;
+  if Length(Edit7.Text)<5 then
+  begin
+    ShowMessage('O usuário deve conter mais que 4 letras');
+    Exit;
+  end
+  else
+  begin
+    Result := true;
+    SalvarConfig();
+  end;
 end;
 
 procedure TFormConfig.Carregar();
@@ -137,11 +147,13 @@ end;
 
 procedure TFormConfig.BitBtn1Click(Sender: TObject);
 begin
-  Salvar();
+  if Salvar() then
+    ModalResult := mrOk;
 end;
 
 procedure TFormConfig.FormCreate(Sender: TObject);
 begin
+  Closing := False;
   Started := False;
   Carregar();
   Started := True;
@@ -190,14 +202,23 @@ begin
   Panel1.Enabled := CheckBox1.Checked;
 end;
 
-procedure TFormConfig.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TFormConfig.BitBtn2Click(Sender: TObject);
 begin
-  if Length(Edit7.Text)<5 then
-  begin
-    ShowMessage('O usuário deve conter mais que 4 letras');
-    CanClose := False;
-  end;
+  Cancelar();
+end;
+
+procedure TFormConfig.Cancelar;
+begin
+  //teve ateração?
+  if not BitBtn4.Enabled then
+    ModalResult := mrCancel
+  else
+    //confirma se descarta
+    if MessageDlg('Descarta alterações e fecha?',
+       mtConfirmation, [mbYes, mbNo], 0)=mrYes then
+      ModalResult := mrCancel
+    else
+      Exit;
 end;
 
 end.

@@ -63,6 +63,7 @@ type
     procedure ButtonDisconnect(Sender: TObject);
     procedure IdIRC1ServerUsersListReceived(ASender: TIdContext;
       AUsers: TStrings);
+    procedure Button1Click(Sender: TObject);
   private
     IRCChannel: String;
     Users: TStrings;
@@ -70,7 +71,7 @@ type
     FInChannel: Boolean;
 
     procedure ConfiguraIRC();
-    procedure Configura();
+    function Configura(): boolean;
     procedure Connect();
     procedure Disconnect();
     procedure Identify(Password: string);
@@ -91,7 +92,7 @@ var
 
 implementation
 
-uses UnitConfig;
+uses UnitConfig, ProcessUtil, SHELLAPI;
 
 {$R *.dfm}
 
@@ -251,14 +252,17 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   Users := TStringList.Create();
   LogRecebidas.lines.clear();
-  Configura();
-  ConfiguraIRC();
   FInChannel := False;
   ComboBoxNames.Items.Text := '#'+IRCChannel;
   ComboBoxNames.ItemIndex := 0;
+
+  if not Configura() then
+    Halt;
+    
+  ConfiguraIRC();
   Connect();
   Timer1.interval := 2*60*1000;
-  Label1.Caption := '10.09.2010 17:40';  
+  Label1.Caption := '23.09.2010 13:01';  
 end;
 
 procedure TForm1.EditSendKeyPress(Sender: TObject; var Key: Char);
@@ -275,11 +279,11 @@ begin
  
 end;
 
-procedure TForm1.Configura();
+function TForm1.Configura(): boolean;
 begin
   with TFormConfig.Create(self) do
   try
-    ShowModal();
+    result := ShowModal()= mrOK;
   finally
     Free();
   end;
@@ -287,8 +291,12 @@ end;
 
 procedure TForm1.ButtonConfigurarClick(Sender: TObject);
 begin
-  Configura();
-  ConfiguraIRC();
+  if Configura() then
+  begin
+    Disconnect();
+    ConfiguraIRC();
+    Connect();
+end;
 end;
 
 procedure TForm1.Part;
@@ -545,6 +553,14 @@ begin
 {$ENDIF}
   ;
 
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  if FileExists('manual.mht') then
+    ShellExecute(Application.Handle, nil,'manual.mht', nil, nil, SW_SHOWNORMAL)
+  else
+    ShowMessage('Arquivo "manual.mht" não encontrado!');
 end;
 
 end.
