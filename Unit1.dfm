@@ -173,8 +173,9 @@ object Form1: TForm1
     Top = 8
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = 'Manual'
     TabOrder = 4
+    OnClick = Button1Click
   end
   object IdIRC1: TIdIRC
     OnStatus = IdIRC1Status
