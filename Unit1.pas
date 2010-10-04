@@ -86,7 +86,8 @@ type
     canSay: Boolean;
     procedure Say(ATarget, Texto: string);
   end;
-
+const
+  Version='04.10.2010 11:01';
 var
   Form1: TForm1;
 
@@ -262,7 +263,7 @@ begin
   ConfiguraIRC();
   Connect();
   Timer1.interval := 2*60*1000;
-  Label1.Caption := '23.09.2010 13:01';  
+  Label1.Caption := Version;
 end;
 
 procedure TForm1.EditSendKeyPress(Sender: TObject; var Key: Char);

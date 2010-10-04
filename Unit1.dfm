@@ -74,7 +74,7 @@ object Form1: TForm1
       end>
   end
   object ButtonConectar: TButton
-    Left = 248
+    Left = 312
     Top = 8
     Width = 89
     Height = 25
