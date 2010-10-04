@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, IniFiles, ExtCtrls;
+  Dialogs, StdCtrls, Buttons, IniFiles, ExtCtrls, ShellApi;
 
 type
   TFormConfig = class(TForm)
@@ -32,6 +32,7 @@ type
     Label4: TLabel;
     Edit8: TEdit;
     CheckBox1: TCheckBox;
+    Button1: TButton;
     procedure BitBtn4Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -42,6 +43,7 @@ type
     procedure BitBtn3Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     Started: Boolean;
     Closing: Boolean;
@@ -65,6 +67,8 @@ implementation
 procedure TFormConfig.CarregarConfig(ConfigFile: string);
 var
   Ini: TIniFile;
+  LS: TStrings;
+  I: Integer;
 begin
   ini := TIniFile.Create(ConfigFile);
   try
@@ -73,22 +77,24 @@ begin
     Edit3.Text := ini.readstring('irc', 'nick', '');
     Edit4.Text := ini.readstring('irc', 'password', 'sesc');
     Edit5.Text := ini.readstring('irc', 'altnick', '');
-    Edit6.Text := ini.readstring('irc', 'username', 'Dummy');
-    Edit7.Text := ini.readstring('irc', 'realname', 'Dummy');
+    Edit6.Text := ini.readstring('irc', 'username', 'Alterar');
+    Edit7.Text := ini.readstring('irc', 'realname', Edit6.Text);
     Edit8.Text := ini.readstring('irc', 'channel', 'ip-sesc');
     Ini.ReadSection('Usuarios', ListBox1.Items);
+
     if Listbox1.Items.Count = 0 then
     begin
-      Listbox1.Items.Add('Antena01');
-      Listbox1.Items.Add('Antena02');
-      Listbox1.Items.Add('Antena03');
-      Listbox1.Items.Add('Antena04');
-      Listbox1.Items.Add('Antena05');
-     {Listbox1.Items.Add('Antena06');
-      Listbox1.Items.Add('Antena07');
-      Listbox1.Items.Add('Antena08');
-      Listbox1.Items.Add('Antena09');
-      Listbox1.Items.Add('Antena10');}
+      LS:= TStringList.Create;
+      Randomize;
+        for i := 0 to 9 do
+          LS.Add(Format('Antena%2.2d',[i+1]));
+
+       while LS.count>0 do
+       begin
+         I := Random(LS.Count);
+         Listbox1.Items.Add(LS[I]);
+         LS.Delete(I);
+       end;
     end;
   finally
     Ini.Free();
@@ -219,6 +225,14 @@ begin
       ModalResult := mrCancel
     else
       Exit;
+end;
+
+procedure TFormConfig.Button1Click(Sender: TObject);
+begin
+  if FileExists('manual.mht') then
+    ShellExecute(Application.Handle, nil,'manual.mht', nil, nil, SW_SHOWNORMAL)
+  else
+    ShowMessage('Arquivo "manual.mht" não encontrado!');
 end;
 
 end.

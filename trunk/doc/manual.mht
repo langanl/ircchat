@@ -1,9 +1,9 @@
 MIME-Version: 1.0
-Content-Type: multipart/related; boundary="----=_NextPart_01CB5B46.4B3D2D90"
+Content-Type: multipart/related; boundary="----=_NextPart_01CB63C7.612E7F30"
 
 Este documento é uma Página da Web de Arquivo Único, também conhecido como Arquivo da Web. Se você estiver lendo esta mensagem, o seu navegador ou editor não oferecem suporte a Arquivos da Web. Baixe um navegador que ofereça suporte a Arquivos da Web, como o Microsoft Internet Explorer.
 
-------=_NextPart_01CB5B46.4B3D2D90
+------=_NextPart_01CB63C7.612E7F30
 Content-Location: file:///C:/2048E08C/manual.htm
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/html; charset="us-ascii"
@@ -34,23 +34,25 @@ w\:* {behavior:url(#default#VML);}
   <o:Author>SERVI&#199;O SOCIAL DO COM&#201;RCIO - ADM. NACIONAL</o:Author>
   <o:LastAuthor>SERVI&#199;O SOCIAL DO COM&#201;RCIO - ADM. NACIONAL</o:Las=
 tAuthor>
-  <o:Revision>3</o:Revision>
-  <o:TotalTime>341</o:TotalTime>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>343</o:TotalTime>
   <o:LastPrinted>2010-09-09T16:55:00Z</o:LastPrinted>
-  <o:Created>2010-09-23T20:39:00Z</o:Created>
-  <o:LastSaved>2010-09-23T20:39:00Z</o:LastSaved>
-  <o:Pages>2</o:Pages>
-  <o:Words>500</o:Words>
-  <o:Characters>2700</o:Characters>
+  <o:Created>2010-10-04T16:23:00Z</o:Created>
+  <o:LastSaved>2010-10-04T16:23:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>405</o:Words>
+  <o:Characters>2190</o:Characters>
   <o:Company>SERVI&#199;O SOCIAL DO COM&#201;RCIO - ADM. NACIONAL</o:Compan=
 y>
-  <o:Lines>22</o:Lines>
-  <o:Paragraphs>6</o:Paragraphs>
-  <o:CharactersWithSpaces>3194</o:CharactersWithSpaces>
+  <o:Lines>18</o:Lines>
+  <o:Paragraphs>5</o:Paragraphs>
+  <o:CharactersWithSpaces>2590</o:CharactersWithSpaces>
   <o:Version>11.9999</o:Version>
  </o:DocumentProperties>
 </xml><![endif]--><!--[if gte mso 9]><xml>
  <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
   <w:HyphenationZone>21</w:HyphenationZone>
   <w:PunctuationKerning/>
   <w:ValidateAgainstSchemas/>
@@ -200,6 +202,12 @@ p.codigo, li.codigo, div.codigo
 	mso-fareast-font-family:"Times New Roman";
 	mso-bidi-font-family:"Times New Roman";
 	mso-bidi-font-weight:bold;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
 @page Section1
 	{size:595.3pt 841.9pt;
 	margin:70.85pt 3.0cm 70.85pt 3.0cm;
@@ -441,7 +449,10 @@ table.MsoTableGrid
 
 <div class=3DSection1>
 
-<h1><a name=3D"Caracter&iacute;sticas_Gerais">Inter&aacute;gil</a></h1>
+<h1><a name=3D"Caracter&iacute;sticas_Gerais"></a><span class=3DSpellE><span
+style=3D'mso-bookmark:Caracter\00EDsticas_Gerais'>Inter&aacute;gil</span></=
+span><span
+style=3D'mso-bookmark:Caracter\00EDsticas_Gerais'></span></h1>
 
 <h2><span style=3D'mso-bookmark:Caracter\00EDsticas_Gerais'>Caracter&iacute=
 ;sticas
@@ -536,10 +547,14 @@ p>
 em
 definida como padr&atilde;o para acesso das antenas, sendo necess&aacute;ri=
 o apenas
-adicionar o Nome da Unidade, com ao menos 5 letras, sem espa&ccedil;o e no
-seguinhte formato: DRUnidade.</p>
+adicionar o Nome da Unidade, com ao menos <span class=3DGramE>5</span> letr=
+as,
+sem espa&ccedil;o e no <span class=3DSpellE>seguinhte</span> formato: <span
+class=3DSpellE>DRUnidade</span>.</p>
 
-<p class=3DMsoNormal style=3D'text-indent:35.4pt'>Ex.: RJPetropolis</p>
+<p class=3DMsoNormal style=3D'text-indent:35.4pt'>Ex.: <span class=3DSpellE=
+><span
+class=3DGramE>RJPetropolis</span></span></p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -583,7 +598,8 @@ comunica&ccedil;&atilde;o texto (8000)</p>
 
 <p class=3DMsoNormal style=3D'margin-left:35.4pt'><b><i style=3D'mso-bidi-f=
 ont-style:
-normal'>Canal:</i></b> Canal dos cursos (ip-sesc)</p>
+normal'>Canal:</i></b> Canal dos cursos (<span class=3DSpellE>ip-sesc</span=
+>)</p>
 
 <h3><o:p>&nbsp;</o:p></h3>
 
@@ -634,12 +650,17 @@ pt'>Vers&atilde;o
      (data hora) da compila&ccedil;&atilde;o do programa.</li>
  <li class=3DMsoNormal style=3D'mso-list:l4 level1 lfo6;tab-stops:list 36.0=
 pt'>&Aacute;rea
-     de texto, exibe as conversas e algumas mensagens de status.</li>
+     de texto<span class=3DGramE>, exibe</span> as conversas e algumas mens=
+agens
+     de status.</li>
  <li class=3DMsoNormal style=3D'mso-list:l4 level1 lfo6;tab-stops:list 36.0=
-pt'>Combo
-     usu&aacute;rios: caso seja necess&aacute;ria uma mensagem privada,
-     selecione nesta lista o destinat&aacute;rio, o padr&atilde;o &eacute;
-     publica<span style=3D'mso-spacerun:yes'>&nbsp; </span>(#ip-sesc).</li>
+pt'><span
+     class=3DSpellE>Combo</span> usu&aacute;rios: caso seja necess&aacute;r=
+ia uma
+     mensagem privada, selecione nesta lista o destinat&aacute;rio, o
+     padr&atilde;o &eacute; publica<span class=3DGramE><span
+     style=3D'mso-spacerun:yes'>&nbsp; </span></span>(#<span class=3DSpellE=
+>ip-sesc</span>).</li>
  <li class=3DMsoNormal style=3D'mso-list:l4 level1 lfo6;tab-stops:list 36.0=
 pt'>Espa&ccedil;o
      para a mensagem a ser enviada.</li>
@@ -663,72 +684,13 @@ e em
 pt'>A
      partir deste momento um contador interno de 2 minutos ser&aacute; inic=
 iado,
-     caso nenhuma mensagem seja enviada, o programa se auto-desconectar&aac=
-ute;,
+     caso nenhuma mensagem seja enviada, o programa se <span class=3DGramE>=
+auto-desconectar&aacute;</span>,
      para que outra unidade possa utilizar os usu&aacute;rios para colabora=
 r.</li>
 </ul>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
-<h1>Guia r&aacute;pido:</h1>
-
-<h2>Configura&ccedil;&atilde;o</h2>
-
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
-<p class=3DMsoNormal><!--[if gte vml 1]><v:shape id=3D"_x0000_i1027" type=
-=3D"#_x0000_t75"
- style=3D'width:327.75pt;height:167.25pt'>
- <v:imagedata src=3D"manual_arquivos/image001.png" o:title=3D""/>
-</v:shape><![endif]--><![if !vml]><img border=3D0 width=3D437 height=3D223
-src=3D"manual_arquivos/image002.jpg" v:shapes=3D"_x0000_i1027"><![endif]></=
-p>
-
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
-<p class=3DMsoNormal>A configura&ccedil;&atilde;o b&aacute;sica j&aacute; v=
-em
-definida como padr&atilde;o para acesso das antenas, sendo necess&aacute;rio
-apenas adicionar o Nome da Unidade, com ao menos 5 letras, sem espa&ccedil;=
-os e
-no seguinhte formato: DRUnidade.</p>
-
-<p class=3DMsoNormal style=3D'text-indent:35.4pt'>Ex.: RJPetropolis</p>
-
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
-<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><!--[if gte=
- vml 1]><v:shape
- id=3D"_x0000_i1028" type=3D"#_x0000_t75" style=3D'width:416.25pt;height:23=
-1pt'>
- <v:imagedata src=3D"manual_arquivos/image003.png" o:title=3D""/>
-</v:shape><![endif]--><![if !vml]><img border=3D0 width=3D555 height=3D308
-src=3D"manual_arquivos/image004.jpg" v:shapes=3D"_x0000_i1028"><![endif]></=
-p>
-
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
-<h3>Enviando Mensagem</h3>
-
-<ul style=3D'margin-top:0cm' type=3Dsquare>
- <li class=3DMsoNormal style=3D'mso-list:l2 level1 lfo5;tab-stops:list 36.0=
-pt'>No
-     espa&ccedil;o designado para mensagem, digite o texto em seguida cliqu=
-e em
-     &#8220;enviar&#8221; ou tecle ENTER para que a mensagem seja enviada.<=
-/li>
- <li class=3DMsoNormal style=3D'mso-list:l2 level1 lfo5;tab-stops:list 36.0=
-pt'>A
-     partir deste momento um contador interno de 2 minutos ser&aacute;
-     iniciado, caso nenhuma mensagem seja enviada, o programa se
-     auto-desconectar&aacute;, para que outra unidade possa utilizar os
-     usu&aacute;rios para colaborar.</li>
-</ul>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -738,7 +700,7 @@ pt'>A
 
 </html>
 
-------=_NextPart_01CB5B46.4B3D2D90
+------=_NextPart_01CB63C7.612E7F30
 Content-Location: file:///C:/2048E08C/manual_arquivos/image001.png
 Content-Transfer-Encoding: base64
 Content-Type: image/png
@@ -987,7 +949,7 @@ yzULyTEJzS2+c3RaNrcUXE/GcN96xBWFwCi5JcB2AXC63KvpmoergFsZXBMIQZ9c83BtrOC1cC1D
 wJZyLaFrHYOV0FNsKGSKEJUoRZLvk0jPw0Tb5ykiCiECiAAi0EwI/H9NKm8TAvHgqAAAAABJRU5E
 rkJggk==
 
-------=_NextPart_01CB5B46.4B3D2D90
+------=_NextPart_01CB63C7.612E7F30
 Content-Location: file:///C:/2048E08C/manual_arquivos/image002.jpg
 Content-Transfer-Encoding: base64
 Content-Type: image/jpeg
@@ -1396,7 +1358,7 @@ Cf8A7Gj/AIXPb/8AQEf/AMCf/saP7MxX8v4r/MPb0+/4M7v7HrH/AEF4v/AMf/FVNptjJYpP504n
 knmMrME2DJAHTJ9K8+/4XPb/APQEf/wJ/wDsaP8Ahc9v/wBAR/8AwJ/+xo/szFfy/iv8w9vT7/gz
 lfif/wAj1e/7sf8A6LWisvxVri+I9en1RIDAJQo8stuxhQOuB6UV9LSi404xe6SX4HI3dtn/2d==
 
-------=_NextPart_01CB5B46.4B3D2D90
+------=_NextPart_01CB63C7.612E7F30
 Content-Location: file:///C:/2048E08C/manual_arquivos/image003.png
 Content-Transfer-Encoding: base64
 Content-Type: image/png
@@ -1632,7 +1594,7 @@ nCW1p//DbEtX0w5K6ctM73bPKe5xJnc6E1udye2us+waZ96En1sqS33upq+u6ydQO9qU3i/pa29H
 Mz2l1Ha2JaG0KO84VadSdKbHXWfJlxzvqbZURKEQgAAEIACB2gT+PwBipmsle6oOAAAAAElFTkSu
 QmCC
 
-------=_NextPart_01CB5B46.4B3D2D90
+------=_NextPart_01CB63C7.612E7F30
 Content-Location: file:///C:/2048E08C/manual_arquivos/image004.jpg
 Content-Transfer-Encoding: base64
 Content-Type: image/jpeg
@@ -2060,7 +2022,7 @@ HJHsH2+5/wCen6Ufb7n/AJ6fpRRS55dw5I9g+33P/PT9KPt9z/z0/Siinzy7hyR7B9vuf+en6Ufb
 7n/np+lFFHPLuHJHsH2+5/56fpR9vuf+en6UUUc8u4ckewfb7j+/+lV2YsxJ6miiolJvdlRilsj/
 2c==
 
-------=_NextPart_01CB5B46.4B3D2D90
+------=_NextPart_01CB63C7.612E7F30
 Content-Location: file:///C:/2048E08C/manual_arquivos/filelist.xml
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/xml; charset="utf-8"
@@ -2073,4 +2035,4 @@ Content-Type: text/xml; charset="utf-8"
  <o:File HRef=3D"image004.jpg"/>
  <o:File HRef=3D"filelist.xml"/>
 </xml>
-------=_NextPart_01CB5B46.4B3D2D90--
+------=_NextPart_01CB63C7.612E7F30--

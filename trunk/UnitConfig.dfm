@@ -4,7 +4,7 @@ object FormConfig: TFormConfig
   ActiveControl = BitBtn1
   BorderStyle = bsDialog
   Caption = 'Configura'#231#245'es'
-  ClientHeight = 191
+  ClientHeight = 223
   ClientWidth = 431
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object FormConfig: TFormConfig
   TextHeight = 13
   object GroupBox1: TGroupBox
     Left = 8
-    Top = 8
+    Top = 40
     Width = 217
     Height = 145
     Caption = ' Servidor '
@@ -115,7 +115,7 @@ object FormConfig: TFormConfig
   end
   object BitBtn1: TBitBtn
     Left = 256
-    Top = 160
+    Top = 192
     Width = 80
     Height = 23
     Caption = 'OK'
@@ -126,7 +126,7 @@ object FormConfig: TFormConfig
   end
   object BitBtn2: TBitBtn
     Left = 344
-    Top = 160
+    Top = 192
     Width = 80
     Height = 23
     Caption = 'Cancelar'
@@ -136,7 +136,7 @@ object FormConfig: TFormConfig
   end
   object BitBtn4: TBitBtn
     Left = 144
-    Top = 160
+    Top = 192
     Width = 80
     Height = 23
     Caption = 'Recarregar'
@@ -147,7 +147,7 @@ object FormConfig: TFormConfig
   end
   object GroupBox2: TGroupBox
     Left = 232
-    Top = 8
+    Top = 40
     Width = 193
     Height = 145
     Caption = ' Usu'#225'rios '
@@ -203,7 +203,7 @@ object FormConfig: TFormConfig
   end
   object Edit3: TEdit
     Left = 8
-    Top = 160
+    Top = 192
     Width = 25
     Height = 21
     TabOrder = 5
@@ -212,7 +212,7 @@ object FormConfig: TFormConfig
   end
   object Edit5: TEdit
     Left = 40
-    Top = 160
+    Top = 192
     Width = 25
     Height = 21
     TabOrder = 6
@@ -221,7 +221,7 @@ object FormConfig: TFormConfig
   end
   object Edit6: TEdit
     Left = 72
-    Top = 160
+    Top = 192
     Width = 25
     Height = 21
     TabOrder = 7
@@ -230,12 +230,21 @@ object FormConfig: TFormConfig
   end
   object BitBtn6: TBitBtn
     Left = 56
-    Top = 160
+    Top = 192
     Width = 80
     Height = 23
     Caption = 'Padr'#227'o'
     TabOrder = 8
     OnClick = BitBtn6Click
     NumGlyphs = 2
+  end
+  object Button1: TButton
+    Left = 8
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Manual'
+    TabOrder = 9
+    OnClick = Button1Click
   end
 end
