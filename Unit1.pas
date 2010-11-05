@@ -6,11 +6,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls,inifiles, Buttons, ComCtrls, IdBaseComponent,
+  Dialogs, StdCtrls, inifiles, Buttons, ComCtrls, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdCmdTCPClient, IdIRC,
-  IdContext, ExtCtrls, IdAntiFreezeBase, IdAntiFreeze;
+  IdContext, ExtCtrls, IdAntiFreezeBase, IdAntiFreeze, Menus,
+  FrameChatImpl;
 
 type
+
 
   TForm1 = class(TForm)
     ButtonConfigurar: TBitBtn;
@@ -18,42 +20,42 @@ type
     ButtonConectar: TButton;
     IdIRC1: TIdIRC;
     Timer1: TTimer;
-    Panel1: TPanel;
-    Splitter1: TSplitter;
-    Panel2: TPanel;
-    ComboBoxNames: TComboBox;
-    ButtonSend: TButton;
-    EditSend: TMemo;
-    Panel3: TPanel;
-    LogRecebidas: TRichEdit;
     Label1: TLabel;
     IdAntiFreeze1: TIdAntiFreeze;
     Button1: TButton;
-    procedure ButtonSendClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+    PopupMenu1: TPopupMenu;
+    Add1: TMenuItem;
+    Delete1: TMenuItem;
+    PageControl1: TPageControl;
+    TabControle: TTabSheet;
+    LogControle: TRichEdit;
+    TabPublico: TTabSheet;
+    Splitter3: TSplitter;
+    ListBox2: TListBox;
+    FrameChat1: TFrameChat;
     procedure EditSendKeyPress(Sender: TObject; var Key: Char);
     procedure ButtonConfigurarClick(Sender: TObject);
     procedure IdIRC1ServerError(ASender: TIdContext; AErrorCode: Integer;
-      const AErrorMessage: String);
+      const AErrorMessage: string);
     procedure IdIRC1IsOnIRC(ASender: TIdContext; const ANickname,
-      AHost: String);
+      AHost: string);
     procedure IdIRC1UserInfoReceived(ASender: TIdContext;
       AUserInfo: TStrings);
     procedure IdIRC1NicknameChange(ASender: TIdContext; const AOldNickname,
-      AHost, ANewNickname: String);
+      AHost, ANewNickname: string);
     procedure IdIRC1Notice(ASender: TIdContext; const ANicknameFrom, AHost,
-      ANicknameTo, ANotice: String);
+      ANicknameTo, ANotice: string);
     procedure IdIRC1Connected(Sender: TObject);
     procedure IdIRC1Join(ASender: TIdContext; const ANickname, AHost,
-      AChannel: String);
+      AChannel: string);
     procedure IdIRC1Status(ASender: TObject; const AStatus: TIdStatus;
-      const AStatusText: String);
+      const AStatusText: string);
     procedure IdIRC1Raw(ASender: TIdContext; AIn: Boolean;
-      const AMessage: String);
+      const AMessage: string);
     procedure IdIRC1PrivateMessage(ASender: TIdContext;
-      const ANicknameFrom, AHost, ANicknameTo, AMessage: String);
+      const ANicknameFrom, AHost, ANicknameTo, AMessage: string);
     procedure IdIRC1Part(ASender: TIdContext; const ANickname, AHost,
-      AChannel: String);
+      AChannel: string);
     procedure TimerDisconect(Sender: TObject);
     procedure IdIRC1Disconnected(Sender: TObject);
     procedure LogRecebidasChange(Sender: TObject);
@@ -64,8 +66,14 @@ type
     procedure IdIRC1ServerUsersListReceived(ASender: TIdContext;
       AUsers: TStrings);
     procedure Button1Click(Sender: TObject);
+    procedure Delete1Click(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
+    procedure ListBox2DblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
   private
-    IRCChannel: String;
+    IRCChannel: string;
     Users: TStrings;
     NickIdx: Integer;
     FInChannel: Boolean;
@@ -78,16 +86,18 @@ type
     procedure Join(AChannel: string);
     procedure Part();
     procedure Nick(NickName: string);
-    procedure ExibeConversa(ANickFrom, AMessage:string);
+    procedure ExibeConversa(ANickTo, AMessage: string);
     procedure WaitFor(var BoolVar: Boolean; Timeout: Cardinal = 5);
 
+    function AdicionaPrivate(AFrom: string): TTabSheet;
+    function GetFrame(ANickFrom, ANickTo: string): TFrameChat;
   public
     { Public declarations }
     canSay: Boolean;
     procedure Say(ATarget, Texto: string);
   end;
 const
-  Version='04.10.2010 11:01';
+  Version = '04.10.2010 11:01';
 var
   Form1: TForm1;
 
@@ -99,7 +109,7 @@ uses UnitConfig, ProcessUtil, SHELLAPI;
 
 procedure Log(s: string);
 var
-  APath, ALogFile: String;
+  APath, ALogFile: string;
   TLogFile: TextFile;
 begin
   ALogFile := 'log.txt';
@@ -117,7 +127,7 @@ begin
 
     Writeln(TLogFile, s);
   finally
-    {$I-}CloseFile(TLogFile);{$I+}
+{$I-}CloseFile(TLogFile); {$I+}
   end;
 end;
 
@@ -130,7 +140,7 @@ end;
 procedure TForm1.Connect();
 begin
   FInChannel := False;
-  NickIdx := Users.Count-1;
+  NickIdx := Users.Count - 1;
   IdIrc1.Nickname := Users[NickIdx];
   IdIRC1.AltNickname := Users[NickIdx];
 
@@ -156,8 +166,8 @@ begin
   if (AChannel = '') then
     AChannel := IRCChannel;
 
-  if AChannel[1]<>'#' then
-    AChannel := '#' + AChannel ;
+  if AChannel[1] <> '#' then
+    AChannel := '#' + AChannel;
 
   //  if not Identified then
   IdIRC1.Raw(Format('JOIN %s', [AChannel]));
@@ -167,45 +177,8 @@ procedure TForm1.Say(ATarget, Texto: string);
 var
   AMsg: string;
 begin
-  //Refresh timer
-  Timer1.Enabled := False;
-  Timer1.Enabled := True;
-
-  //ops... algo aconteceu!
-  if not canSay then
-    Exit;
-
-  if ATarget='' then
-    ATarget := '#'+IRCChannel;
-
-  ATarget := StringReplace(ATarget,'@','',[rfReplaceAll]);
-  ATarget := StringReplace(ATarget,'+','',[rfReplaceAll]);
-  AMsg := StringReplace(AMsg, #13, '',[rfReplaceAll]);
-  AMsg := StringReplace(AMsg, #10, ' ',[rfReplaceAll]);
-  AMsg := Format('[%s] %s',[IdIRC1.RealName, Texto]);
-
-  IdIRC1.Raw(Format('PRIVMSG %s :%s', [ATarget, AMsg]));
-
-  if ATarget = '#'+IRCChannel then
-    LogRecebidas.Lines.Add(AMsg)
-  else
-  begin
-    LogRecebidas.Lines.Add(Format('[%s] <%s>: %s',[IdIRC1.RealName, ATarget, Texto]));
-  end;
-end;
-
-procedure TForm1.WaitFor(var BoolVar: Boolean; Timeout: Cardinal = 5);
-var
-  start: Cardinal;
-begin
-  start := GetTickCount();
-  while (not BoolVar) and (GetTickCount() - start < (Timeout*1000)) do
-    Application.ProcessMessages;
-end;
-
-procedure TForm1.ButtonSendClick(Sender: TObject);
-begin
-  EditSend.SetFocus();
+(*
+// retirado de SendMessage
   if not IdIRC1.Connected then
   begin
     ConfiguraIRC();
@@ -222,6 +195,45 @@ begin
     Disconnect();
     Exit;
   end;
+  *)
+
+  //Refresh timer
+  Timer1.Enabled := False;
+  Timer1.Enabled := True;
+
+  //ops... algo aconteceu!
+  if not canSay then
+    Exit;
+
+  if ATarget = '' then
+    ATarget := '#' + IRCChannel;
+
+  ATarget := StringReplace(ATarget, '@', '', [rfReplaceAll]);
+  ATarget := StringReplace(ATarget, '+', '', [rfReplaceAll]);
+  AMsg := StringReplace(AMsg, #13, '', [rfReplaceAll]);
+  AMsg := StringReplace(AMsg, #10, ' ', [rfReplaceAll]);
+  AMsg := Format('[%s] %s', [IdIRC1.RealName, Texto]);
+
+  IdIRC1.Raw(Format('PRIVMSG %s :%s', [ATarget, AMsg]));
+
+  if Pos(IRCChannel, ATarget) > 0 then
+    FrameChat1.AddMessage(AMsg)
+  else
+  begin
+    GetFrame(ATarget, '').
+      AddMessage(
+      Format('[%s] <%s>: %s', [IdIRC1.RealName, ATarget, Texto])
+      );
+  end;
+end;
+
+procedure TForm1.WaitFor(var BoolVar: Boolean; Timeout: Cardinal = 5);
+var
+  start: Cardinal;
+begin
+  start := GetTickCount();
+  while (not BoolVar) and (GetTickCount() - start < (Timeout * 1000)) do
+    Application.ProcessMessages;
 end;
 
 procedure TForm1.ConfiguraIRC();
@@ -249,26 +261,9 @@ begin
   StatusBar1.Panels[1].Text := format('%s : %d - [%s]', [IdIRC1.Host, IdIRC1.Port, IdIRC1.RealName]);
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-  Users := TStringList.Create();
-  LogRecebidas.lines.clear();
-  FInChannel := False;
-  ComboBoxNames.Items.Text := '#'+IRCChannel;
-  ComboBoxNames.ItemIndex := 0;
-
-  if not Configura() then
-    Halt;
-    
-  ConfiguraIRC();
-  Connect();
-  Timer1.interval := 2*60*1000;
-  Label1.Caption := Version;
-end;
-
 procedure TForm1.EditSendKeyPress(Sender: TObject; var Key: Char);
 begin
-  if key = #27 then
+(*  if key = #27 then
     EditSend.Lines.clear();
 
   if key = #13 then
@@ -277,16 +272,18 @@ begin
     EditSend.Lines.clear();
     Key := #0;
   end;
- 
+*)
 end;
 
 function TForm1.Configura(): boolean;
+var
+  FrmConfig: TFormConfig;
 begin
-  with TFormConfig.Create(self) do
+  FrmConfig := TFormConfig.Create(self);
   try
-    result := ShowModal()= mrOK;
+    result := FrmConfig.ShowModal() = mrOK;
   finally
-    Free();
+    FreeAndNil(FrmConfig);
   end;
 end;
 
@@ -297,29 +294,29 @@ begin
     Disconnect();
     ConfiguraIRC();
     Connect();
-end;
+  end;
 end;
 
 procedure TForm1.Part;
 begin
   Timer1.Enabled := False;
-  IdIRC1.Part('#'+IRCChannel);
+  IdIRC1.Part('#' + IRCChannel);
 end;
 
 procedure TForm1.Nick(NickName: string);
 begin
-  IdIRC1.Raw(format('NICK %s',[NickName]));
+  IdIRC1.Raw(format('NICK %s', [NickName]));
 end;
 
 procedure TForm1.IdIRC1ServerError(ASender: TIdContext;
-  AErrorCode: Integer; const AErrorMessage: String);
+  AErrorCode: Integer; const AErrorMessage: string);
 begin
-  Log('ServerError:'+AErrorMessage);
-  ShowMessage('ServerError:'+AErrorMessage);
+  Log('ServerError:' + AErrorMessage);
+  ShowMessage('ServerError:' + AErrorMessage);
 end;
 
 procedure TForm1.IdIRC1IsOnIRC(ASender: TIdContext; const ANickname,
-  AHost: String);
+  AHost: string);
 begin
   Log('isonIRC');
 end;
@@ -328,34 +325,34 @@ procedure TForm1.IdIRC1UserInfoReceived(ASender: TIdContext;
   AUserInfo: TStrings);
 begin
 {$IFDEF DEBUG}
-  Log('inforeceived'+AUserInfo.Text);
-  LogRecebidas.Lines.Add('inforeceived:'+#13+AUserInfo.Text);
+  Log('inforeceived' + AUserInfo.Text);
+  LogControle.Lines.Add('inforeceived:' + #13 + AUserInfo.Text);
 {$ENDIF}
 end;
 
 procedure TForm1.IdIRC1NicknameChange(ASender: TIdContext;
-  const AOldNickname, AHost, ANewNickname: String);
+  const AOldNickname, AHost, ANewNickname: string);
 begin
-  {$IFDEF DEBUG}
-  Log(Format('NickNameChange'+#10+'OLD=%s NEW=%s Host=%s',
-    [AOldNickname+#10, ANewNickname+#10, AHost+#10]));
-  {$ENDIF}
+{$IFDEF DEBUG}
+  Log(Format('NickNameChange' + #10 + 'OLD=%s NEW=%s Host=%s',
+    [AOldNickname + #10, ANewNickname + #10, AHost + #10]));
+{$ENDIF}
 end;
 
 procedure TForm1.IdIRC1Notice(ASender: TIdContext; const ANicknameFrom,
-  AHost, ANicknameTo, ANotice: String);
+  AHost, ANicknameTo, ANotice: string);
 begin
   //need Identify
-  if Pos('IDENTIFY_REQUEST', ANotice)>0 then
+  if Pos('IDENTIFY_REQUEST', ANotice) > 0 then
     Identify(IdIRC1.Password);
 
   //Do Join
-  if Pos('IDENTIFY Password accepted', ANotice)>0 then
+  if Pos('IDENTIFY Password accepted', ANotice) > 0 then
     Join(IRCChannel);
 
 {$IFDEF DEBUG}
-  Log('OnNotice'+#13+'nick:' + ANicknameFrom +' host:'+ AHost +
-  ' to:'+ ANicknameTo + ' notice:' + ANotice);
+  Log('OnNotice' + #13 + 'nick:' + ANicknameFrom + ' host:' + AHost +
+    ' to:' + ANicknameTo + ' notice:' + ANotice);
 {$ENDIF}
 
 end;
@@ -372,17 +369,16 @@ begin
 end;
 
 procedure TForm1.IdIRC1Status(ASender: TObject; const AStatus: TIdStatus;
-  const AStatusText: String);
+  const AStatusText: string);
 begin
-  {$IFDEF DEBUG}
-  Log('Status:'+AStatusText);
-  {$ENDIF}
-  StatusBar1.Panels[0].Text := AStatusText;
+{$IFDEF DEBUG}
+  Log('Status:' + AStatusText);
+{$ENDIF}
 end;
 
-function ParseNames(s:string):string;
+function ParseNames(s: string): string;
 var
-  Lista:TStrings;
+  Lista: TStrings;
 begin
   Lista := TStringList.Create();
   Lista.Delimiter := ' ';
@@ -391,34 +387,38 @@ begin
 end;
 
 procedure TForm1.IdIRC1Raw(ASender: TIdContext; AIn: Boolean;
-  const AMessage: String);
+  const AMessage: string);
 var
   oldDest: string;
 begin
-  {$IFDEF DEBUG}
+{$IFDEF DEBUG}
   Log('OnRaw: ' + AMessage);
-  {$ENDIF}
+{$ENDIF}
 
   //User in uso, tenta alterar nick
-  if Copy(AMessage, 1, 3) ='433' then
+  if Copy(AMessage, 1, 3) = '433' then
   begin
     Dec(NickIdx);
-    if NickIdx<0 then
+    if NickIdx < 0 then
       IdIRC1.Disconnect();
     Nick(Users[NickIdx]);
   end;
 
   //lista de usuarios
-  if Copy(AMessage, 1, 3) ='353' then
+  if Copy(AMessage, 1, 3) = '353' then
   begin
-    oldDest := ComboBoxNames.Text;
-  //353 Antena04 = #ip-sesc :@SescApoio SescADM @SescDN Antena05 @carlos DNAndre Antena04
-    ComboBoxNames.Enabled := True;
+//:???    oldDest := ComboBoxNames.Text;
+   //353 Antena04 = #ip-sesc :@SescApoio SescADM @SescDN Antena05 @carlos DNAndre Antena04
+{    ComboBoxNames.Enabled := True;
     ComboBoxNames.Items.Text := ParseNames(AMessage);
     ComboBoxNames.Items.Insert(0, '#'+IRCChannel);
     ComboBoxNames.ItemIndex := ComboBoxNames.Items.IndexOf(oldDest);
-
+}
+    ListBox2.Items.Text := ParseNames(AMessage);
     canSay := True;
+
+    //foi entregue?
+    {
     if ComboBoxNames.Items.IndexOf(oldDest) < -1 then
     begin
       ShowMessage('Usuário "'+oldDest+'" desconectou-se, a mensagem não será enviada!');
@@ -427,36 +427,40 @@ begin
 
     if ComboBoxNames.ItemIndex < 0 then
       ComboBoxNames.ItemIndex := 0;
+      }
   end;
 
-  if Copy(AMessage, 1,3) = '401' then
+  if Copy(AMessage, 1, 3) = '401' then
   begin
-    oldDest := 'O usuario não está mais conectado'+#10+
+    oldDest := 'O usuario não está mais conectado' + #10 +
       'Tente enviar a mensagem para o chat público: #' + IRCChannel;
-    LogRecebidas.SelAttributes.Style := [fsBold];
-    LogRecebidas.SelAttributes.Color := clTeal;    
-    LogRecebidas.Lines.Add(oldDest);
-    LogRecebidas.SelAttributes.Color := clBtnText;
+
+//    LogRecebidas.SelAttributes.Style := [fsBold];
+//    LogRecebidas.SelAttributes.Color := clTeal;
+    TFrameChat(TabPublico.Controls[0]).AddMessage(oldDest);
+//    LogRecebidas.SelAttributes.Color := clBtnText;
   end;
 end;
 
 procedure TForm1.IdIRC1PrivateMessage(ASender: TIdContext;
-  const ANicknameFrom, AHost, ANicknameTo, AMessage: String);
+  const ANicknameFrom, AHost, ANicknameTo, AMessage: string);
 begin
-  if SameText(ANicknameTo, '#ip-sesc') then
-  begin
-    LogRecebidas.Lines.Add(Format('<%s> %s',[ANicknameFrom, AMessage]));
-  end
+  //é chat público???
+  if Pos(IRCChannel, ANicknameTo) > 0 then
+    FrameChat1.AddMessage(
+      Format('<%s> %s', [ANicknamefrom, AMessage]))
   else
-    ExibeConversa(ANicknameFrom, AMessage);
+    ExibeConversa(ANicknameFrom,
+      Format('<%s> %s', [ANicknamefrom, AMessage]));
 end;
 
-
-procedure TForm1.ExibeConversa(ANickFrom, AMessage: string);
+procedure TForm1.ExibeConversa(ANickTo, AMessage: string);
+var
+  Frame: TFrameChat;
 begin
-  LogRecebidas.SelAttributes.Style := [fsBold];
-  LogRecebidas.Lines.Add(Format('<%s> [%s]: %s',[IdIRC1.RealName,ANickFrom, AMessage]));
-  LogRecebidas.SelAttributes.Color := clBtnText;
+  Frame := GetFrame(ANickTo, '');
+  Frame.AddMessage(AMessage);
+  PageControl1.ActivePage := TTabSheet(Frame.parent);
 end;
 
 procedure TForm1.TimerDisconect(Sender: TObject);
@@ -464,7 +468,7 @@ var
   T: boolean;
 begin
   FInChannel := False;
-  IdIRC1.ListChannelNicknames('#'+IRCChannel);
+  IdIRC1.ListChannelNicknames('#' + IRCChannel);
   WaitFor(T, 5);
   Disconnect();
 end;
@@ -472,10 +476,11 @@ end;
 procedure TForm1.IdIRC1Disconnected(Sender: TObject);
 begin
   Timer1.Enabled := False;
-  LogRecebidas.SelAttributes.Color := clRed;
-  LogRecebidas.SelAttributes.Style := [fsBold];
-  LogRecebidas.Lines.Add('<< Desconectado automaticamente.');
-  LogRecebidas.SelAttributes.Color := clBtnText;
+
+  LogControle.SelAttributes.Color := clRed;
+  LogControle.SelAttributes.Style := [fsBold];
+  LogControle.Lines.Add('<< Desconectado automaticamente.');
+  LogControle.SelAttributes.Color := clBtnText;
 
   ButtonConectar.Caption := 'Conectar';
   ButtonConectar.OnClick := ButtonConnect;
@@ -484,16 +489,18 @@ end;
 procedure TForm1.LogRecebidasChange(Sender: TObject);
 begin
   //Rola a tela para a última linha adicionada
-  SendMessage(LogRecebidas.Handle, WM_VSCROLL, SB_PAGEDOWN, 0);
+  SendMessage(LogControle.Handle, WM_VSCROLL, SB_PAGEDOWN, 0);
 end;
 
 procedure TForm1.EditSendKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+{
   StatusBar1.Panels[0].Text :=
     Format('Resta: %d', [(length(EditSend.Lines.Text) - 255)*-1]);
 
   ButtonSend.Enabled := (Length(EditSend.Lines.Text) >0);// and IdIRC1.Connected;
+  }
 end;
 
 procedure TForm1.ButtonConnect(Sender: TObject);
@@ -511,57 +518,177 @@ procedure TForm1.IdIRC1ServerUsersListReceived(ASender: TIdContext;
 begin
 {$IFDEF DEBUG}
 //exibe a lista  de pessoas online
-  LogRecebidas.Lines.AddStrings(AUsers);
+  LogControle.Lines.AddStrings(AUsers);
 {$ENDIF}
 end;
 
 procedure TForm1.IdIRC1Join(ASender: TIdContext; const ANickname, AHost,
-  AChannel: String);
+  AChannel: string);
 begin
 {$IFDEF DEBUG}
-  LogRecebidas.Lines.Add('>>Usuário ' + ANickname + ' conectou-se');
+  LogControle.Lines.Add('>>Usuário ' + ANickname + ' conectou-se');
 {$ENDIF}
   //adiciona na lista caso não exista
-  if not (ComboBoxNames.Items.IndexOf(ANickname)>-1) then
-    ComboBoxNames.Items.Add(ANickname);
-
-  //se for meu nome, avisa que estou no canal.
-  if Pos(ANickname, IdIRC1.Nickname)>0 then
-    FInChannel := True;
-end;
-
-procedure TForm1.IdIRC1Part(ASender: TIdContext; const ANickname, AHost,
-  AChannel: String);
-var
-  i: Integer;
-begin
-  //retira da lista caso exista.
-  i := ComboBoxNames.Items.IndexOf(ANickname);
-  if i >-1 then
+  if not (ListBox2.Items.IndexOf(ANickname) > -1) then
   begin
-    ComboBoxNames.Items.Delete(i);
-
-    if (ComboBoxNames.ItemIndex=i) then
-      ComboBoxNames.ItemIndex := 0;
+    ListBox2.Items.Add(ANickname);
   end;
 
   //se for meu nome, avisa que estou no canal.
-  if Pos(LowerCase(ANickname), LowerCase(IdIRC1.Nickname))>0 then
+  if Pos(ANickname, IdIRC1.Nickname) > 0 then
+  begin
+    FInChannel := True;
+    StatusBar1.Panels[0].Text := 'Conectado';
+    PageControl1.Pages[0].Caption := IRCChannel;
+  end;
+end;
+
+procedure TForm1.IdIRC1Part(ASender: TIdContext; const ANickname, AHost,
+  AChannel: string);
+var
+  i: Integer;
+begin
+  {TODO: Retirar o nome da lista}
+
+  //retira da lista caso exista.
+  i := ListBox2.Items.IndexOf(ANickname);
+  if i > -1 then
+  begin
+    ListBox2.Items.Delete(i);
+
+    if (ListBox2.ItemIndex = i) then
+      ListBox2.ItemIndex := 0;
+  end;
+
+  i := ListBox2.Items.IndexOf(ANickname);
+  if i > -1 then
+    ListBox2.Items.Delete(i);
+
+  //se for meu nome, avisa que estou no canal.
+  if Pos(LowerCase(ANickname), LowerCase(IdIRC1.Nickname)) > 0 then
     FInChannel := False
 {$IFDEF DEBUG}
   else
-    LogRecebidas.Lines.Add('<<Usuário ' + ANickname + ' desconectou-se')
+    LogControle.Lines.Add('<<Usuário ' + ANickname + ' desconectou-se')
 {$ENDIF}
-  ;
+    ;
 
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   if FileExists('manual.mht') then
-    ShellExecute(Application.Handle, nil,'manual.mht', nil, nil, SW_SHOWNORMAL)
+    ShellExecute(Application.Handle, nil, 'manual.mht', nil, nil, SW_SHOWNORMAL)
   else
     ShowMessage('Arquivo "manual.mht" não encontrado!');
+end;
+
+procedure TForm1.Delete1Click(Sender: TObject);
+begin
+  if PageControl1.ActivePage = TabControle then
+    TabControle.TabVisible := False
+  else
+    PageControl1.ActivePage.Destroy;
+end;
+
+procedure TForm1.PopupMenu1Popup(Sender: TObject);
+begin
+  Delete1.Caption := 'Remover ' + PageControl1.ActivePage.Caption;
+
+  if PageControl1.ActivePage = TabControle then
+    Delete1.Caption := 'Ocultar aba de Controle';
+end;
+
+procedure TForm1.ListBox1DblClick(Sender: TObject);
+begin
+  PageControl1.ActivePage :=
+    AdicionaPrivate(ListBox2.Items[ListBox2.ItemIndex]);
+end;
+
+function TForm1.GetFrame(ANickFrom, ANickTo: string): TFrameChat;
+var
+  i: integer;
+  Page: TTabSheet;
+begin
+//  TFrameChat(TabPublico.Controls[0]).AddMessage(oldDest);
+//  LogRecebidas.SelAttributes.Style := [fsBold];
+//  LogRecebidas.Lines.Add(Format('<%s> [%s]: %s',[IdIRC1.RealName,ANickFrom, AMessage]));
+//  LogRecebidas.SelAttributes.Color := clBtnText;
+  Result := nil;
+
+  //tenta localizar
+  for i := 0 to PageControl1.PageCount - 1 do
+  begin
+    Page := PageControl1.Pages[i];
+
+    if AnsiPos(Page.Caption, ANickFrom) > 0 then
+      Result := TFrameChat(Page.Components[0]);
+  end;
+
+  if not Assigned(Result) then
+  begin
+    Page := TTabSheet.Create(PageControl1);
+    Page.PageControl := PageControl1;
+    Page.Caption := ANickFrom;
+    Result := TFrameChat.Create(Page);
+    Result.ParentForm := Self;
+    Result.Parent := Page;
+    Result.From := ANickFrom;
+  end;
+end;
+
+function TForm1.AdicionaPrivate(AFrom: string): TTabSheet;
+var
+  Page: TTabSheet;
+  Frame: TFrameChat;
+begin
+  Page := TTabSheet.Create(self);
+  Page.PageControl := PageControl1;
+  Page.Caption := AFrom;
+  Frame := TFrameChat.Create(Page);
+  Frame.ParentForm := Self;
+  Frame.Parent := Page;
+  Frame.From := AFrom;
+  Result := Page;
+end;
+
+procedure TForm1.ListBox2DblClick(Sender: TObject);
+var
+  Page: TTabSheet;
+  Frame: TFrameChat;
+  ATarget: string;
+begin
+  ATarget := ListBox2.Items[ListBox2.itemindex];
+  ATarget := StringReplace(ATarget, '@', '', [rfReplaceAll]);
+  ATarget := StringReplace(ATarget, '+', '', [rfReplaceAll]);
+
+  Frame := GetFrame(ATarget, '');
+  Page := TTabSheet(Frame.Parent);
+  PageControl1.ActivePage := Page;
+//  Page := AdicionaPrivate();
+//  Page.SetFocus;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Users := TStringList.Create();
+  FrameChat1.Clear();
+  FInChannel := False;
+//  ComboBoxNames.Items.Text := '#'+IRCChannel;
+//  ComboBoxNames.ItemIndex := 0;
+
+  TabControle.TabVisible := False;
+  //:???  if not Configura() then Halt;
+  ConfiguraIRC();
+  Connect();
+  Timer1.interval := 2 * 60 * 1000;
+  Label1.Caption := Version;
+end;
+
+procedure TForm1.Label1Click(Sender: TObject);
+begin
+  TabControle.TabVisible := True;
+  PageControl1.ActivePage := TabControle;
 end;
 
 end.

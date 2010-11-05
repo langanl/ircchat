@@ -1,9 +1,8 @@
 object Form1: TForm1
-  Left = 152
-  Top = 223
+  Left = 257
+  Top = 167
   Width = 555
-  Height = 308
-  ActiveControl = EditSend
+  Height = 376
   BorderIcons = [biSystemMenu]
   Caption = 'Envio de mensagens'
   Color = clBtnFace
@@ -18,7 +17,7 @@ object Form1: TForm1
   OnDestroy = TimerDisconect
   DesignSize = (
     547
-    274)
+    342)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -29,6 +28,7 @@ object Form1: TForm1
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Label1'
+    OnClick = Label1Click
   end
   object ButtonConfigurar: TBitBtn
     Left = 8
@@ -62,7 +62,7 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 255
+    Top = 323
     Width = 547
     Height = 19
     Panels = <
@@ -74,7 +74,7 @@ object Form1: TForm1
       end>
   end
   object ButtonConectar: TButton
-    Left = 312
+    Left = 272
     Top = 8
     Width = 89
     Height = 25
@@ -83,99 +83,75 @@ object Form1: TForm1
     Visible = False
     OnClick = ButtonConnect
   end
-  object Panel1: TPanel
-    Left = 8
-    Top = 39
-    Width = 529
-    Height = 211
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    BevelOuter = bvNone
-    Caption = 'Panel1'
-    TabOrder = 3
-    object Splitter1: TSplitter
-      Left = 0
-      Top = 173
-      Width = 529
-      Height = 3
-      Cursor = crVSplit
-      Align = alBottom
-      Color = clActiveCaption
-      ParentColor = False
-    end
-    object Panel2: TPanel
-      Left = 0
-      Top = 176
-      Width = 529
-      Height = 35
-      Align = alBottom
-      BevelOuter = bvNone
-      Constraints.MinHeight = 35
-      TabOrder = 0
-      DesignSize = (
-        529
-        35)
-      object ComboBoxNames: TComboBox
-        Left = 2
-        Top = 10
-        Width = 105
-        Height = 19
-        AutoComplete = False
-        Style = csOwnerDrawFixed
-        ItemHeight = 13
-        TabOrder = 0
-      end
-      object ButtonSend: TButton
-        Left = 453
-        Top = 9
-        Width = 75
-        Height = 23
-        Anchors = [akTop, akRight]
-        Caption = 'Enviar'
-        TabOrder = 1
-        OnClick = ButtonSendClick
-      end
-      object EditSend: TMemo
-        Left = 112
-        Top = 9
-        Width = 331
-        Height = 21
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        TabOrder = 2
-        OnKeyPress = EditSendKeyPress
-        OnKeyUp = EditSendKeyUp
-      end
-    end
-    object Panel3: TPanel
-      Left = 0
-      Top = 0
-      Width = 529
-      Height = 173
-      Align = alClient
-      TabOrder = 1
-      DesignSize = (
-        529
-        173)
-      object LogRecebidas: TRichEdit
-        Left = 0
-        Top = 0
-        Width = 529
-        Height = 162
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        ReadOnly = True
-        ScrollBars = ssVertical
-        TabOrder = 0
-        OnChange = LogRecebidasChange
-      end
-    end
-  end
   object Button1: TButton
     Left = 160
     Top = 8
     Width = 75
     Height = 25
     Caption = 'Manual'
-    TabOrder = 4
+    TabOrder = 3
     OnClick = Button1Click
+  end
+  object PageControl1: TPageControl
+    Left = 8
+    Top = 40
+    Width = 529
+    Height = 281
+    ActivePage = TabControle
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    PopupMenu = PopupMenu1
+    TabOrder = 4
+    object TabControle: TTabSheet
+      Caption = 'TabControle'
+      ImageIndex = 1
+      object LogControle: TRichEdit
+        Left = 0
+        Top = 0
+        Width = 521
+        Height = 253
+        Align = alClient
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 0
+        OnChange = LogRecebidasChange
+      end
+    end
+    object TabPublico: TTabSheet
+      Caption = 'Publico'
+      ImageIndex = 2
+      object Splitter3: TSplitter
+        Left = 397
+        Top = 0
+        Height = 253
+        Align = alRight
+      end
+      object ListBox2: TListBox
+        Left = 400
+        Top = 0
+        Width = 121
+        Height = 253
+        Align = alRight
+        ItemHeight = 13
+        TabOrder = 0
+        OnDblClick = ListBox2DblClick
+      end
+      inline FrameChat1: TFrameChat
+        Left = 0
+        Top = 0
+        Width = 397
+        Height = 253
+        Align = alClient
+        TabOrder = 1
+        inherited FrameMsg: TRichEdit
+          Width = 397
+          Height = 224
+        end
+        inherited Panel1: TPanel
+          Top = 224
+          Width = 397
+        end
+      end
+    end
   end
   object IdIRC1: TIdIRC
     OnStatus = IdIRC1Status
@@ -199,18 +175,30 @@ object Form1: TForm1
     OnServerError = IdIRC1ServerError
     OnNicknameChange = IdIRC1NicknameChange
     OnRaw = IdIRC1Raw
-    Left = 88
-    Top = 32
+    Left = 368
+    Top = 8
   end
   object Timer1: TTimer
     Enabled = False
     Interval = 30000
     OnTimer = TimerDisconect
-    Left = 152
-    Top = 32
+    Left = 432
+    Top = 8
   end
   object IdAntiFreeze1: TIdAntiFreeze
-    Left = 120
-    Top = 32
+    Left = 400
+    Top = 8
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 172
+    Top = 128
+    object Add1: TMenuItem
+      Caption = 'Add'
+    end
+    object Delete1: TMenuItem
+      Caption = 'Delete'
+      OnClick = Delete1Click
+    end
   end
 end
