@@ -7,9 +7,10 @@ uses
   Dialogs, ComCtrls,
   IdAntiFreezeBase, IdAntiFreeze, ExtCtrls,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  IdCmdTCPClient, IdIRC, IdContext, IdSync, 
+  IdCmdTCPClient, IdIRC, IdContext, IdSync,
   StdCtrls, Buttons, FrameChatImpl, Inifiles, Menus, ActnList, XPMan,
-  ImgList, ToolWin;
+  ImgList, ToolWin,
+  ShellApi;
 
 type
   TMyThread = class(TThread)
@@ -25,13 +26,6 @@ type
     Label1: TLabel;
     IdIRC1: TIdIRC;
     Timer1: TTimer;
-    PageControl1: TPageControl;
-    TabControle: TTabSheet;
-    TabPublico: TTabSheet;
-    LogMsgControle: TRichEdit;
-    FrameChat1: TFrameChat;
-    ListBox1: TListBox;
-    Splitter1: TSplitter;
     StatusBar1: TStatusBar;
     PopupMenu1: TPopupMenu;
     Delete1: TMenuItem;
@@ -44,7 +38,7 @@ type
     ActManual: TAction;
     ActSair: TAction;
     ActDisconectar: TAction;
-    Action1: TAction;
+    ActOcultarTabControl: TAction;
     CoolBar1: TCoolBar;
     ToolBar2: TToolBar;
     ToolButton10: TToolButton;
@@ -54,6 +48,15 @@ type
     ToolButton14: TToolButton;
     ToolButton15: TToolButton;
     ToolButton16: TToolButton;
+    PageControl1: TPageControl;
+    TabControle: TTabSheet;
+    LogMsgControle: TRichEdit;
+    TabPublico: TTabSheet;
+    Splitter1: TSplitter;
+    FrameChat1: TFrameChat;
+    ListBox1: TListBox;
+    ActFecharTab: TAction;
+    BitBtn1: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure IdIRC1Connected(Sender: TObject);
     procedure IdIRC1Join(ASender: TIdContext; const ANickname, AHost,
@@ -65,7 +68,6 @@ type
     procedure ListBox1DblClick(Sender: TObject);
     procedure IdIRC1PrivateMessage(ASender: TIdContext;
       const ANicknameFrom, AHost, ANicknameTo, AMessage: string);
-    procedure PopupMenu1Popup(Sender: TObject);
     procedure Delete1Click(Sender: TObject);
     procedure IdIRC1Quit(ASender: TIdContext; const ANickname, AHost,
       AReason: string);
@@ -75,7 +77,10 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure IdIRC1Disconnected(Sender: TObject);
     procedure ActDisconectarExecute(Sender: TObject);
-    procedure Action1Execute(Sender: TObject);
+    procedure ActOcultarTabControlExecute(Sender: TObject);
+    procedure ActFecharTabHint(var HintStr: string; var CanShow: Boolean);
+    procedure ActFecharTabExecute(Sender: TObject);
+    procedure ActManualExecute(Sender: TObject);
   private
     { Private declarations }
     FInChannel: Boolean;
@@ -87,7 +92,6 @@ type
     function Configura: boolean;
     procedure Disconnect;
     function ConfiguraIRC: Boolean;
-    procedure Connect;
     procedure Nick(NickName: string);
     procedure Identify(Password: string);
     procedure Join(AChannel: string);
@@ -97,14 +101,13 @@ type
     procedure LogControle(s: string);
   public
     { Public declarations }
-    canSay: Boolean;
     procedure Say(ATarget, Texto: string);
     procedure ShowPVTMSG(const ANicknameFrom, ANicknameTo, AMessage: string);
   end;
 
 const
-  TimerInterval =  2 * 60 * 1000;
- // TimerInterval = 2 * 60 * 100;
+  TimerInterval = 2 * 60 * 1000;
+ // TimerInterval = 2 * 30 * 100;
 var
 
   Form2: TForm2;
@@ -131,7 +134,7 @@ var
 begin
   FrmConfig := TFormConfig.Create(self);
   try
-    result := FrmConfig.ShowModal() = mrOK;
+    Result := FrmConfig.ShowModal() = mrOK;
   finally
     FreeAndNil(FrmConfig);
   end;
@@ -144,6 +147,13 @@ begin
   NickIdx := Users.Count - 1;
   IdIrc1.Nickname := Users[NickIdx];
   IdIRC1.AltNickname := Users[NickIdx];
+
+  if NickIdx < 0 then
+  begin
+    ShowMessage('Não existem usuarios disponíveis para interação.' + #10 +
+      'Tente novamente mais tarde.');
+    exit;
+  end;
 
   try
     IdIRC1.Connect();
@@ -168,42 +178,22 @@ begin
 
   TabControle.TabVisible := False;
 
-  //:???  if not Configura() then Halt;
   if not ConfiguraIRC() then
     if not Configura() then
       Halt
     else
       ConfiguraIRC();
 
-  Connect();
+  Conectar();
 
   Timer1.interval := TimerInterval;
 
   Label1.Caption := Version;
-
-end;
-
-procedure TForm2.Connect();
-begin
-  FInChannel := False;
-  NickIdx := Users.Count - 1;
-  IdIrc1.Nickname := Users[NickIdx];
-  IdIRC1.AltNickname := Users[NickIdx];
-
-  try
-    IdIRC1.Connect();
-  except
-
-    if not idIRC1.Connected then
-    begin
-      MessageDlg('Erro ao tentar conectar:' + idIRC1.Host, mtError, [mbOK], 0);
-      Exit;
-    end;
-  end;
 end;
 
 procedure TForm2.Disconnect();
 begin
+  FInChannel := False;
   Timer1.Enabled := False;
   IdIRC1.Disconnect();
 end;
@@ -219,8 +209,11 @@ begin
   CfgFile := ExtractFilePath(ParamStr(0)) + '\config.ini';
 
   Result := False;
-  If not FileExists(cfgFile) then
+  if not FileExists(cfgFile) then
+  begin
+    ActManual.Execute();  
     Exit;
+  end;
 
   Ini := TMemIniFile.Create(CfgFile);
   try
@@ -267,15 +260,8 @@ end;
 
 procedure TForm2.IdIRC1Join(ASender: TIdContext; const ANickname, AHost,
   AChannel: string);
-
 begin
   LogControle('>>Usuário ' + ANickname + ' conectou-se');
-  //adiciona na lista caso não exista
-  if not (ListBox1.Items.IndexOf(ANickname) > -1) then
-  begin
-    ListBox1.Items.Add(ANickname);
-  end;
-  ListBox1.Items.Text := Ordena(ListBox1.Items);
 
   //se for meu nome, avisa que estou no canal.
   if Pos(ANickname, IdIRC1.Nickname) > 0 then
@@ -287,6 +273,11 @@ begin
     PageControl1.Pages[0].Caption := IRCChannel;
   end;
 
+  //adiciona na lista caso não exista
+  if not (ListBox1.Items.IndexOf(ANickname) > -1) then
+    ListBox1.Items.Add(ANickname);
+
+  ListBox1.Items.Text := Ordena(ListBox1.Items);
 end;
 
 procedure TForm2.IdIRC1Raw(ASender: TIdContext; AIn: Boolean;
@@ -311,7 +302,13 @@ begin
   begin
     Dec(NickIdx);
     if NickIdx < 0 then
+    begin
+      ShowMessage('Não existem usuarios disponíveis para interação.' + #10 +
+        'Tente novamente mais tarde.');
       IdIRC1.Disconnect();
+      Exit;
+    end;
+
     Nick(Users[NickIdx]);
   end;
 
@@ -320,7 +317,6 @@ begin
   begin
     ListBox1.Items.Text := ParseNames(AMessage);
     ListBox1.Items.Text := Ordena(ListBox1.Items);
-    canSay := True;
   end;
 
   if Copy(AMessage, 1, 3) = '401' then
@@ -345,7 +341,6 @@ begin
   if AChannel[1] <> '#' then
     AChannel := '#' + AChannel;
 
-  //  if not Identified then
   IdIRC1.Raw(Format('JOIN %s', [AChannel]));
 end;
 
@@ -409,7 +404,6 @@ begin
     Page.Caption := ANickFrom;
     Result := TFrameChat.Create(Page);
     Result.Parent := Page;
-
     Result.ParentForm := Form2;
     Result.From := ANickFrom;
   end;
@@ -425,12 +419,14 @@ begin
   if not IdIRC1.Connected then
   begin
     ConfiguraIRC();
-    Connect();
-    Join(IRCChannel);
+    Conectar();
   end;
 
   try
-    WaitFor(FInChannel,10);
+  //não enviar comando de JOIN, ele será enviado
+  //após o usuario ser identificado
+  //  Join(IRCChannel);
+    WaitFor(FInChannel, 30);
   except
     MessageDlg('Erro ao tentar entrar no canal: ' + idIRC1.Host, mtError, [mbOK], 0);
     Disconnect();
@@ -446,10 +442,6 @@ begin
   //Refresh timer
   Timer1.Enabled := False;
   Timer1.Enabled := True;
-
-  //ops... algo aconteceu!
-  if not canSay then
-    Exit;
 
   if ATarget = '' then
     ATarget := '#' + IRCChannel;
@@ -512,9 +504,11 @@ begin
     end
     else
     begin
-      FrameChat1.AddMessage('Clique duas vezes sobre este usuario para iniciar uma conversa Privada!', clRed);
       FrameChat1.AddMessage(
-        Format('PRIVADO <%s>: %s', [ANicknameFrom, AMessage]), clRed);
+        Format('Usuario <%s> enviou uma mensagem Particular:', [ANicknameFrom]), clRed);
+      FrameChat1.AddMessage(
+        Format('Mensagem: %s', [AMessage]), clRed);
+      FrameChat1.AddMessage('Clique duas vezes sobre este usuario para iniciar uma conversa Privada!', clRed);
     end;
   end;
   Application.ProcessMessages;
@@ -531,14 +525,6 @@ begin
   t1.a2 := ANicknameTo;
   t1.a3 := AMessage;
   t1.Resume;
-end;
-
-procedure TForm2.PopupMenu1Popup(Sender: TObject);
-begin
-  Delete1.Caption := 'Remover ' + PageControl1.ActivePage.Caption;
-
-  if PageControl1.ActivePage = TabControle then
-    Delete1.Caption := 'Ocultar aba de Controle';
 end;
 
 procedure TForm2.Delete1Click(Sender: TObject);
@@ -585,7 +571,7 @@ begin
   begin
     Disconnect();
     ConfiguraIRC();
-    Connect();
+    Conectar();
   end;
 end;
 
@@ -627,9 +613,42 @@ begin
   LogMsgControle.Lines.Add(s);
 end;
 
-procedure TForm2.Action1Execute(Sender: TObject);
+procedure TForm2.ActOcultarTabControlExecute(Sender: TObject);
 begin
   TabControle.TabVisible := not TabControle.TabVisible;
+end;
+
+procedure TForm2.ActFecharTabHint(var HintStr: string; var CanShow: Boolean);
+begin
+  if PageControl1.ActivePage = TabPublico then
+    HintStr := ''
+  else
+    if PageControl1.ActivePage = TabControle then
+      HintStr := 'Ocultar aba de Controle'
+    else
+      HintStr := 'Remover conversa com ' + PageControl1.ActivePage.Caption
+end;
+
+procedure TForm2.ActFecharTabExecute(Sender: TObject);
+begin
+  if PageControl1.ActivePage = TabPublico then
+    Exit
+  else
+    if PageControl1.ActivePage = TabControle then
+      TabControle.TabVisible := False
+    else
+    begin
+      PageControl1.ActivePage.Destroy;
+      PageControl1.ActivePage := TabPublico;
+    end;
+end;
+
+procedure TForm2.ActManualExecute(Sender: TObject);
+begin
+  if FileExists('manual.mht') then
+    ShellExecute(Application.Handle, nil, 'manual.mht', nil, nil, SW_SHOWNORMAL)
+  else
+    ShowMessage('Arquivo "manual.mht" não encontrado!');
 end;
 
 end.
