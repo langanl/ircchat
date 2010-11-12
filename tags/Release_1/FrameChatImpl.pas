@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, ComCtrls, StdCtrls, ExtCtrls;
+  Dialogs, ComCtrls, StdCtrls, ExtCtrls, Buttons;
 
 type
   TFrameChat = class(TFrame)
@@ -24,7 +24,7 @@ type
   public
     { Public declarations }
     procedure AddMessage(AText: string; Color: TColor); overload;
-    procedure AddMessage(AText: string); overload;    
+    procedure AddMessage(AText: string); overload;
     procedure Envia();
     procedure Clear();
   published

@@ -34,7 +34,6 @@ type
     CheckBox1: TCheckBox;
     Button1: TButton;
     procedure BitBtn4Click(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BitBtn6Click(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
@@ -44,6 +43,7 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     Started: Boolean;
     Closing: Boolean;
@@ -80,21 +80,21 @@ begin
     Edit6.Text := ini.readstring('irc', 'username', 'Alterar');
     Edit7.Text := ini.readstring('irc', 'realname', Edit6.Text);
     Edit8.Text := ini.readstring('irc', 'channel', 'ip-sesc');
-    Ini.ReadSection('Usuarios', ListBox1.Items);
 
+    Ini.ReadSection('Usuarios', ListBox1.Items);
     if Listbox1.Items.Count = 0 then
     begin
-      LS:= TStringList.Create;
+      LS := TStringList.Create;
       Randomize;
-        for i := 0 to 9 do
-          LS.Add(Format('Antena%2.2d',[i+1]));
+      for i := 0 to 9 do
+        LS.Add(Format('Antena%2.2d', [i + 1]));
 
-       while LS.count>0 do
-       begin
-         I := Random(LS.Count);
-         Listbox1.Items.Add(LS[I]);
-         LS.Delete(I);
-       end;
+      while LS.count > 0 do
+      begin
+        I := Random(LS.Count);
+        Listbox1.Items.Add(LS[I]);
+        LS.Delete(I);
+      end;
     end;
   finally
     Ini.Free();
@@ -115,9 +115,11 @@ begin
     Ini.WriteString('irc', 'altnick', Edit5.Text);
     Ini.WriteString('irc', 'username', Edit6.Text);
     Ini.WriteString('irc', 'realname', Edit7.Text);
-    Ini.WriteString('irc', 'channel', Edit8.Text);    
+    Ini.WriteString('irc', 'channel', Edit8.Text);
+
+    ini.EraseSection('Usuarios');
     for i := 0 to ListBox1.Items.Count - 1 do
-      Ini.WriteString('Usuarios', ListBox1.Items[i], '');
+      Ini.WriteString('Usuarios', ListBox1.Items[i], inttostr(i));
     Ini.UpdateFile();
   finally
     Ini.Free();
@@ -128,7 +130,8 @@ end;
 function TFormConfig.Salvar(): boolean;
 begin
   Result := False;
-  if Length(Edit7.Text)<5 then
+
+  if Length(Edit7.Text) < 5 then
   begin
     ShowMessage('O usuário deve conter mais que 4 letras');
     Exit;
@@ -151,12 +154,6 @@ begin
   Carregar();
 end;
 
-procedure TFormConfig.BitBtn1Click(Sender: TObject);
-begin
-  if Salvar() then
-    ModalResult := mrOk;
-end;
-
 procedure TFormConfig.FormCreate(Sender: TObject);
 begin
   Closing := False;
@@ -172,7 +169,8 @@ end;
 
 procedure TFormConfig.BitBtn5Click(Sender: TObject);
 begin
-  ListBox1.DeleteSelected();
+  if ListBox1.Count > 0 then
+    ListBox1.DeleteSelected();
   BitBtn5.Enabled := False;
 end;
 
@@ -186,7 +184,7 @@ procedure TFormConfig.ListBox1Click(Sender: TObject);
 var
   i: integer;
 begin
-  for i:= 0 to ListBox1.Items.Count-1 do
+  for i := 0 to ListBox1.Items.Count - 1 do
   begin
     BitBtn5.Enabled := ListBox1.Selected[i];
     if BitBtn5.Enabled then
@@ -221,7 +219,7 @@ begin
   else
     //confirma se descarta
     if MessageDlg('Descarta alterações e fecha?',
-       mtConfirmation, [mbYes, mbNo], 0)=mrYes then
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       ModalResult := mrCancel
     else
       Exit;
@@ -230,11 +228,18 @@ end;
 procedure TFormConfig.Button1Click(Sender: TObject);
 begin
   if FileExists('manual.mht') then
-    ShellExecute(Application.Handle, nil,'manual.mht', nil, nil, SW_SHOWNORMAL)
+    ShellExecute(Application.Handle, nil, 'manual.mht', nil, nil, SW_SHOWNORMAL)
   else
     ShowMessage('Arquivo "manual.mht" não encontrado!');
 end;
 
-end.
+procedure TFormConfig.BitBtn1Click(Sender: TObject);
+begin
+  if Salvar() then
+    ModalResult := mrOk
+  else
+    ModalResult := mrCancel;
+end;
 
+end.
 
