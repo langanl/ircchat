@@ -1,10 +1,10 @@
 MIME-Version: 1.0
-Content-Type: multipart/related; boundary="----=_NextPart_01CB8280.BB0E4350"
+Content-Type: multipart/related; boundary="----=_NextPart_01CB8712.56EF5E40"
 
 Este documento é uma Página da Web de Arquivo Único, também conhecido como Arquivo da Web. Se você estiver lendo esta mensagem, o seu navegador ou editor não oferecem suporte a Arquivos da Web. Baixe um navegador que ofereça suporte a Arquivos da Web, como o Microsoft Internet Explorer.
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual.htm
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual.htm
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/html; charset="us-ascii"
 
@@ -18,8 +18,8 @@ xmlns=3D"http://www.w3.org/TR/REC-html40">
 <meta name=3DProgId content=3DWord.Document>
 <meta name=3DGenerator content=3D"Microsoft Word 11">
 <meta name=3DOriginator content=3D"Microsoft Word 11">
-<link rel=3DFile-List href=3D"manual_arquivos/filelist.xml">
-<link rel=3DEdit-Time-Data href=3D"manual_arquivos/editdata.mso">
+<link rel=3DFile-List href=3D"Manual_arquivos/filelist.xml">
+<link rel=3DEdit-Time-Data href=3D"Manual_arquivos/editdata.mso">
 <!--[if !mso]>
 <style>
 v\:* {behavior:url(#default#VML);}
@@ -35,24 +35,25 @@ w\:* {behavior:url(#default#VML);}
   <o:LastAuthor>SERVI&#199;O SOCIAL DO COM&#201;RCIO - ADM. NACIONAL</o:Las=
 tAuthor>
   <o:Revision>2</o:Revision>
-  <o:TotalTime>645</o:TotalTime>
+  <o:TotalTime>655</o:TotalTime>
   <o:LastPrinted>2010-09-09T15:55:00Z</o:LastPrinted>
-  <o:Created>2010-11-12T17:46:00Z</o:Created>
-  <o:LastSaved>2010-11-12T17:46:00Z</o:LastSaved>
+  <o:Created>2010-11-18T13:18:00Z</o:Created>
+  <o:LastSaved>2010-11-18T13:18:00Z</o:LastSaved>
   <o:Pages>1</o:Pages>
-  <o:Words>459</o:Words>
-  <o:Characters>2481</o:Characters>
+  <o:Words>453</o:Words>
+  <o:Characters>2450</o:Characters>
   <o:Company>SERVI&#199;O SOCIAL DO COM&#201;RCIO - ADM. NACIONAL</o:Compan=
 y>
   <o:Lines>20</o:Lines>
   <o:Paragraphs>5</o:Paragraphs>
-  <o:CharactersWithSpaces>2935</o:CharactersWithSpaces>
+  <o:CharactersWithSpaces>2898</o:CharactersWithSpaces>
   <o:Version>11.9999</o:Version>
  </o:DocumentProperties>
 </xml><![endif]--><!--[if gte mso 9]><xml>
  <w:WordDocument>
   <w:SpellingState>Clean</w:SpellingState>
   <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackRevisions/>
   <w:HyphenationZone>21</w:HyphenationZone>
   <w:PunctuationKerning/>
   <w:ValidateAgainstSchemas/>
@@ -104,7 +105,7 @@ y>
 	margin:0cm;
 	margin-bottom:.0001pt;
 	mso-pagination:widow-orphan;
-	font-size:11.0pt;
+	font-size:10.0pt;
 	mso-bidi-font-size:12.0pt;
 	font-family:Tahoma;
 	mso-fareast-font-family:"Times New Roman";
@@ -165,7 +166,7 @@ p
 	mso-margin-bottom-alt:auto;
 	margin-left:0cm;
 	mso-pagination:widow-orphan;
-	font-size:11.0pt;
+	font-size:10.0pt;
 	mso-bidi-font-size:12.0pt;
 	font-family:Tahoma;
 	mso-fareast-font-family:"Times New Roman";
@@ -202,6 +203,17 @@ p.codigo, li.codigo, div.codigo
 	mso-fareast-font-family:"Times New Roman";
 	mso-bidi-font-family:"Times New Roman";
 	mso-bidi-font-weight:bold;}
+span.msoIns
+	{mso-style-type:export-only;
+	mso-style-name:"";
+	text-decoration:underline;
+	text-underline:single;
+	color:teal;}
+span.msoDel
+	{mso-style-type:export-only;
+	mso-style-name:"";
+	text-decoration:line-through;
+	color:red;}
 span.SpellE
 	{mso-style-name:"";
 	mso-spl-e:yes;}
@@ -486,8 +498,9 @@ mso-bidi-font-weight:bold'>&para;</span></a></h2>
 <p class=3DMsoNormal style=3D'text-align:justify'>Este programa foi idealiz=
 ado para
 que seja poss&iacute;vel a participa&ccedil;&atilde;o e
-colabora&ccedil;&atilde;o das unidades do interior atrav&eacute;s do chat
-publico/privado nos eventos em videoconfer&ecirc;ncia.</p>
+colabora&ccedil;&atilde;o dos usu&aacute;rios do modo <span class=3DSpellE>=
+visualizaor</span>,
+via chat publico/particular nos eventos em videoconfer&ecirc;ncia.</p>
 
 <h2><a name=3DInstala&ccedil;&atilde;o>Instala&ccedil;&atilde;o</a><a
 href=3D"https://code.google.com/p/necropole/wiki/ManualdoUsuario#Instala&cc=
@@ -503,20 +516,42 @@ necess&aacute;rio instalar, uma vez que o programa &eacute; composto por um
 
 <h2>Iniciando o Programa</h2>
 
-<ul style=3D'margin-top:0cm' type=3Dsquare>
- <li class=3DMsoNormal style=3D'mso-list:l7 level1 lfo7;tab-stops:list 36.0=
-pt'>Clicar
-     duas vezes sobre o &iacute;cone para executar o programa</li>
- <li class=3DMsoNormal style=3D'mso-list:l7 level1 lfo7;tab-stops:list 36.0=
-pt'>Na
-     primeira execu&ccedil;&atilde;o ser&aacute; exibido este documento de
-     ajuda</li>
- <li class=3DMsoNormal style=3D'mso-list:l7 level1 lfo7;tab-stops:list 36.0=
-pt'>Tamb&eacute;m
-     na primeira vez que este programa for executado, deve ser digitado o n=
-ome
-     da unidade.</li>
-</ul>
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l7 level1 lfo7;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>Clicar duas vezes sobre o &iacute;cone para
+executar o programa</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l7 level1 lfo7;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>Na primeira execu&ccedil;&atilde;o ser&aacut=
+e;
+exibido este documento de ajuda</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l7 level1 lfo7;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>Tamb&eacute;m na <b>primeira vez</b> que este
+programa for executado, deve ser digitado o <b>nome da unidade</b>.</p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -549,9 +584,9 @@ dsize=3D"21600,21600"
 </v:shapetype><v:shape id=3D"_x0000_i1025" type=3D"#_x0000_t75" style=3D'wi=
 dth:327.75pt;
  height:191.25pt'>
- <v:imagedata src=3D"manual_arquivos/image001.gif" o:title=3D"imagem"/>
+ <v:imagedata src=3D"Manual_arquivos/image001.gif" o:title=3D"imagem"/>
 </v:shape><![endif]--><![if !vml]><img border=3D0 width=3D437 height=3D255
-src=3D"manual_arquivos/image001.gif" v:shapes=3D"_x0000_i1025"><![endif]></=
+src=3D"Manual_arquivos/image001.gif" v:shapes=3D"_x0000_i1025"><![endif]></=
 p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
@@ -577,16 +612,6 @@ Manual:</i></b> Exibe este manual.</p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=3DMsoNormal><b><i style=3D'mso-bidi-font-style:normal'>Grupo Servi=
-dor: </i></b>defini&ccedil;&otilde;es
-de acesso do servidor.</p>
-
-<p class=3DMsoNormal><b><i style=3D'mso-bidi-font-style:normal'>Grupo
-Usu&aacute;rios:</i></b> usu&aacute;rios cadastrados para envio de mensagen=
-s.</p>
-
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
 <p class=3DMsoNormal><b><i style=3D'mso-bidi-font-style:normal'>Bot&atilde;o
 Padr&atilde;o:</i></b> retorna a configura&ccedil;&atilde;o padr&atilde;o
 original.</p>
@@ -605,7 +630,9 @@ janela.</p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
-<h3>Grupo Servidor:</h3>
+<h3>Grupo Servidor: <span style=3D'font-size:10.0pt;font-family:Tahoma;
+font-weight:normal'>defini&ccedil;&otilde;es de acesso do servidor.</span><=
+/h3>
 
 <p class=3DMsoNormal style=3D'margin-left:35.4pt'><b><i style=3D'mso-bidi-f=
 ont-style:
@@ -628,7 +655,10 @@ marcando a caixa &#8220;Alterar&#8221;.</p>
 
 <h3><o:p>&nbsp;</o:p></h3>
 
-<h3>Grupo Usu&aacute;rios</h3>
+<h3>Grupo Usu&aacute;rios: <span style=3D'font-size:10.0pt;font-family:Taho=
+ma;
+font-weight:normal'>usu&aacute;rios cadastrados para envio de mensagens.<o:=
+p></o:p></span></h3>
 
 <p class=3DMsoNormal style=3D'margin-left:35.4pt'><b><i style=3D'mso-bidi-f=
 ont-style:
@@ -655,43 +685,88 @@ autentica&ccedil;&atilde;o comum a todos os usu&aacute;rios.</p>
  vml 1]><v:shape
  id=3D"_x0000_i1026" type=3D"#_x0000_t75" style=3D'width:425.25pt;height:25=
 6.5pt'>
- <v:imagedata src=3D"manual_arquivos/image002.png" o:title=3D"telaprincipal=
+ <v:imagedata src=3D"Manual_arquivos/image002.png" o:title=3D"telaprincipal=
 "/>
 </v:shape><![endif]--><![if !vml]><img border=3D0 width=3D567 height=3D342
-src=3D"manual_arquivos/image003.jpg" v:shapes=3D"_x0000_i1026"><![endif]></=
+src=3D"Manual_arquivos/image003.jpg" v:shapes=3D"_x0000_i1026"><![endif]></=
 p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
 <h3>Elementos da Janela</h3>
 
-<ol style=3D'margin-top:0cm' start=3D1 type=3D1>
- <li class=3DMsoNormal style=3D'mso-list:l1 level1 lfo9;tab-stops:list 36.0=
-pt'>Barra
-     de ferramentas</li>
- <li class=3DMsoNormal style=3D'mso-list:l1 level1 lfo9;tab-stops:list 36.0=
-pt'>&Aacute;rea
-     de texto<span class=3DGramE>, exibe</span> as conversas e algumas mens=
-agens
-     de status </li>
- <li class=3DMsoNormal style=3D'mso-list:l1 level1 lfo9;tab-stops:list 36.0=
-pt'>Lista
-     de<span class=3DGramE><span style=3D'mso-spacerun:yes'>&nbsp; </span><=
-/span>usu&aacute;rios:
-     caso seja necess&aacute;ria uma mensagem privada, clique duas vezes so=
-bre
-     o destinat&aacute;rio nesta lista.</li>
- <li class=3DMsoNormal style=3D'mso-list:l1 level1 lfo9;tab-stops:list 36.0=
-pt'>Fechar
-     conversa ativa</li>
- <li class=3DMsoNormal style=3D'mso-list:l1 level1 lfo9;tab-stops:list 36.0=
-pt'>Espa&ccedil;o
-     para a mensagem a ser enviada e bot&atilde;o para envia a mensagem.</l=
-i>
- <li class=3DMsoNormal style=3D'mso-list:l1 level1 lfo9;tab-stops:list 36.0=
-pt'>Dados
-     de conex&atilde;o</li>
-</ol>
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l1 level1 lfo9;mso-list-change:"%1\:1\:0\:\." "SERVI\00C7O=
+ SOCIAL DO COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'mso-fareast-font=
+-family:
+Tahoma;mso-bidi-font-family:Tahoma'><span style=3D'mso-list:Ignore'>1.<span
+style=3D'font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+ </span></span></span><![endif]>Barra
+de ferramentas</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l1 level1 lfo9;mso-list-change:"%1\:2\:0\:\." "SERVI\00C7O=
+ SOCIAL DO COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'mso-fareast-font=
+-family:
+Tahoma;mso-bidi-font-family:Tahoma'><span style=3D'mso-list:Ignore'>2.<span
+style=3D'font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+ </span></span></span><![endif]>&Aacute;rea
+de texto<span class=3DGramE>, exibe</span> as conversas e algumas mensagens=
+ de
+status </p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l1 level1 lfo9;mso-list-change:"%1\:3\:0\:\." "SERVI\00C7O=
+ SOCIAL DO COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'mso-fareast-font=
+-family:
+Tahoma;mso-bidi-font-family:Tahoma'><span style=3D'mso-list:Ignore'>3.<span
+style=3D'font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+ </span></span></span><![endif]>Lista
+de<span class=3DGramE><span style=3D'mso-spacerun:yes'>&nbsp; </span></span=
+>usu&aacute;rios:
+caso seja necess&aacute;ria uma mensagem particular, clique duas vezes sobr=
+e o
+destinat&aacute;rio nesta lista.</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l1 level1 lfo9;mso-list-change:"%1\:4\:0\:\." "SERVI\00C7O=
+ SOCIAL DO COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'mso-fareast-font=
+-family:
+Tahoma;mso-bidi-font-family:Tahoma'><span style=3D'mso-list:Ignore'>4.<span
+style=3D'font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+ </span></span></span><![endif]>Fechar
+conversa ativa (n&atilde;o &eacute; poss&iacute;vel fechar o chat
+p&uacute;blico).</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l1 level1 lfo9;mso-list-change:"%1\:5\:0\:\." "SERVI\00C7O=
+ SOCIAL DO COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'mso-fareast-font=
+-family:
+Tahoma;mso-bidi-font-family:Tahoma'><span style=3D'mso-list:Ignore'>5.<span
+style=3D'font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+ </span></span></span><![endif]>Espa&ccedil;o
+para a mensagem a ser enviada e bot&atilde;o para envia a mensagem.</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l1 level1 lfo9;mso-list-change:"%1\:6\:0\:\." "SERVI\00C7O=
+ SOCIAL DO COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'mso-fareast-font=
+-family:
+Tahoma;mso-bidi-font-family:Tahoma'><span style=3D'mso-list:Ignore'>6.<span
+style=3D'font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+ </span></span></span><![endif]>Informa&ccedil;&atilde;o
+sobre a de conex&atilde;o</p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -702,9 +777,9 @@ pt'>Dados
 <p class=3DMsoNormal style=3D'text-indent:35.4pt'><!--[if gte vml 1]><v:sha=
 pe id=3D"_x0000_i1027"
  type=3D"#_x0000_t75" style=3D'width:105.75pt;height:27pt'>
- <v:imagedata src=3D"manual_arquivos/image004.gif" o:title=3D""/>
+ <v:imagedata src=3D"Manual_arquivos/image004.gif" o:title=3D""/>
 </v:shape><![endif]--><![if !vml]><img border=3D0 width=3D141 height=3D36
-src=3D"manual_arquivos/image004.gif" v:shapes=3D"_x0000_i1027"><![endif]></=
+src=3D"Manual_arquivos/image004.gif" v:shapes=3D"_x0000_i1027"><![endif]></=
 p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
@@ -713,33 +788,70 @@ p>
  para a
 direita:</p>
 
-<ul style=3D'margin-top:0cm' type=3Dsquare>
- <li class=3DMsoNormal style=3D'mso-list:l8 level1 lfo8;tab-stops:list 36.0=
-pt'><b><i
-     style=3D'mso-bidi-font-style:normal'>Desconectar</i></b>: Utilizado pa=
-ra
-     Desconectar manualmente</li>
- <li class=3DMsoNormal style=3D'mso-list:l8 level1 lfo8;tab-stops:list 36.0=
-pt'><b><i
-     style=3D'mso-bidi-font-style:normal'>Conectar</i></b>: Utilizado para =
-Conectar
-     manualmente</li>
- <li class=3DMsoNormal style=3D'mso-list:l8 level1 lfo8;tab-stops:list 36.0=
-pt'><b><i
-     style=3D'mso-bidi-font-style:normal'>Configurar</i></b>: abre a janela=
- de
-     configura&ccedil;&atilde;o</li>
- <li class=3DMsoNormal style=3D'mso-list:l8 level1 lfo8;tab-stops:list 36.0=
-pt'><b><i
-     style=3D'mso-bidi-font-style:normal'>Ajuda</i></b>: exibe este manual =
-de
-     utiliza&ccedil;&atilde;o</li>
- <li class=3DMsoNormal style=3D'mso-list:l8 level1 lfo8;tab-stops:list 36.0=
-pt'><b><i
-     style=3D'mso-bidi-font-style:normal'>Sair</i></b>: utilizado para fech=
-ar o
-     sistema</li>
-</ul>
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l8 level1 lfo8;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b><i style=3D'mso-bidi-font-style:normal'>D=
+esconectar</i></b>:
+Utilizado para Desconectar manualmente</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l8 level1 lfo8;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b><i style=3D'mso-bidi-font-style:normal'>C=
+onectar</i></b>:
+Utilizado para Conectar manualmente</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l8 level1 lfo8;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b><i style=3D'mso-bidi-font-style:normal'>C=
+onfigurar</i></b>:
+abre a janela de configura&ccedil;&atilde;o</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l8 level1 lfo8;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b><i style=3D'mso-bidi-font-style:normal'>A=
+juda</i></b>:
+exibe este manual de utiliza&ccedil;&atilde;o</p>
+
+<p class=3DMsoNormal style=3D'margin-left:36.0pt;text-indent:-36.0pt;mso-te=
+xt-indent-alt:
+-18.0pt;mso-list:l8 level1 lfo8;mso-list-change:\F0A7 "SERVI\00C7O SOCIAL D=
+O COM\00C9RCIO - ADM\. NACIONAL" 20101118T1117;
+tab-stops:list 36.0pt'><![if !supportLists]><span style=3D'font-family:Wing=
+dings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings'><span
+style=3D'mso-list:Ignore'>&sect;<span style=3D'font:7.0pt "Times New Roman"=
+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b><i style=3D'mso-bidi-font-style:normal'>S=
+air</i></b>:
+utilizado para fechar o sistema</p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -752,9 +864,9 @@ ar o
 <p class=3DMsoNormal style=3D'margin-left:18.0pt'><!--[if gte vml 1]><v:sha=
 pe id=3D"_x0000_i1028"
  type=3D"#_x0000_t75" style=3D'width:270pt;height:15.75pt'>
- <v:imagedata src=3D"manual_arquivos/image005.png" o:title=3D""/>
+ <v:imagedata src=3D"Manual_arquivos/image005.png" o:title=3D""/>
 </v:shape><![endif]--><![if !vml]><img border=3D0 width=3D360 height=3D21
-src=3D"manual_arquivos/image006.jpg" v:shapes=3D"_x0000_i1028"><![endif]></=
+src=3D"Manual_arquivos/image006.jpg" v:shapes=3D"_x0000_i1028"><![endif]></=
 p>
 
 <p class=3DMsoNormal style=3D'margin-left:18.0pt'><o:p>&nbsp;</o:p></p>
@@ -762,9 +874,8 @@ p>
 <p class=3DMsoNormal style=3D'margin-left:18.0pt;text-indent:17.4pt'>No
 espa&ccedil;o designado para mensagem, digite o texto em seguida clique em
 &#8220;enviar&#8221; ou tecle ENTER para que a mensagem seja enviada. Caso
-nenhuma mensagem seja <b>enviada</b>, o programa se <span class=3DGramE>aut=
-o-desconectar&aacute;</span>,
-para que outra unidade possa utilizar os usu&aacute;rios para colaborar.</p>
+nenhuma mensagem seja <b>enviada</b>, o programa se auto-desconectar&aacute=
+;.</p>
 
 <p class=3DMsoNormal style=3D'margin-left:18.0pt;text-indent:17.4pt'><o:p>&=
 nbsp;</o:p></p>
@@ -784,8 +895,8 @@ novamente.</p>
 
 </html>
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual_arquivos/image001.gif
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual_arquivos/image001.gif
 Content-Transfer-Encoding: base64
 Content-Type: image/gif
 
@@ -959,8 +1070,8 @@ oQAMQAoOQFZnlVZr1VZvFVdzVVd3lVd71Vd/FViDVViHlViL1ViPexVZk1VZl5VZjbUA7IMAolVa
 p5Vaq9VarxVbs1Vbt5Vbu9VbvxVcw1Vcx5Vcy9VczxVd01Vd15VdA8BdBSAA4FVe45Ve59Ve6xVf
 71Vf85Vf99Vf+xVg/1VgA5ZgB9ZgCxZhD1ZhE5ZhF9ZhGxZiH1ZiI5ZiJ9ZiEzYIAAA7
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual_arquivos/image002.png
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual_arquivos/image002.png
 Content-Transfer-Encoding: base64
 Content-Type: image/png
 
@@ -1237,8 +1348,8 @@ wMaIic1YNIOoJ3tSgpIhMFkCzQb1kige5bgGgckR4CR1cmwpGQJjEvA3aPU1US3fe83NZQ+d4AUB
 CIQiwG8qFEnKgcBkCAzl4IrJFsrLh3qSIuVAAAJD/T7JDAEIJE7AS6KJbwOrBwEIQAACEIhCoCdR
 feIFAQhAAAIQgMBQBNavXz+n/3hBAAIQgAAEIDACgf8PX1VBkMZh44sAAAAASUVORK5CYIJ=
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual_arquivos/image003.jpg
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual_arquivos/image003.jpg
 Content-Transfer-Encoding: base64
 Content-Type: image/jpeg
 
@@ -1594,71 +1705,71 @@ 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
-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
+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
-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
+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
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual_arquivos/image004.gif
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual_arquivos/image004.gif
 Content-Transfer-Encoding: base64
 Content-Type: image/gif
 
@@ -1681,8 +1792,8 @@ XWyQpB8touNae2mhJyaU+Q1HZX9s+ghahik1sgKY5KQCQ5w4PuJTRUlVgVKegVIxKEJV9Znnn9r0
 sIajNOrwKA+JhkkpozgIoOmmnHbq6aeghirqqKSWWqmpoXoUTxmsturqq1sUCuustNZqqKy25qrr
 rHXt6uuvsPYK7LDE/oFrscgmq+YPzDbr7AuzYiYh7bTUVgtDBAA7
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual_arquivos/image005.png
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual_arquivos/image005.png
 Content-Transfer-Encoding: base64
 Content-Type: image/png
 
@@ -1697,8 +1808,8 @@ hrBYYbYRhF0TpqpfP0HYK+E7n+FiB2GvhdM9hN0UJq72amqu6r2bmQjCrgnfOkK4VH9VavWVOVWg
 hfcQhjD6N2Fto23yI4xkzWntwnnSv+VqGh4xaylz1PJ58Preu4+3p0kJYZEVpxcrs5YTziEsMy7L
 zhmdjle6GeSB8AMEYd/7BtlhH5uUHN9qAAAAAElFTkSuQmCC
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual_arquivos/image006.jpg
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual_arquivos/image006.jpg
 Content-Transfer-Encoding: base64
 Content-Type: image/jpeg
 
@@ -1722,32 +1833,32 @@ AD83X/f41doouwsil/Zqf8/N1/3+NH9mp/z83X/f41doouwsil/Zqf8APzdf9/jR/Zqf8/N1/wB/
 jV2ii7CyKX9mp/z83X/f40f2an/Pzdf9/jV2ii7CyKX9mp/z83X/AH+NH9mp/wA/N1/3+NXaKLsL
 Ipf2an/Pzdf9/jR/Zqf8/N1/3+NXaKLsLIpf2an/AD83X/f40f2an/Pzdf8Af41doouwsil/Zqf8
 /N1/3+NH9mp/z83X/f41doouwsil/Zqf8/N1/wB/jWTfXU8XhpZkmZZm8pPM6kbpFUn64NdHXL6l
-/wAipF/10t//AEclNatX7ieidi7/AGBCODqerf8Aga9Q3OlWVlay3VzrGpxQRKXkke+cBVHUmtdi
-dx571l+I7O41Hw3qNlajNxNAyRjcF+btyen1qedj5EQ2On6fqVt9os9Z1SaHJXet5JjI61M+iWyO
-itqmrBpG2qPtr8nBP8gax7rTdcvbaBo5Ly3lt7W4Eay3qkvOWQxM5ThgMNx09Qc0y40bxEkkjW1+
-0qpI8cKSTsA0Jjflufmfe6gE9NgPTo+dhyI3v+Efh/6CWrf+Br/40n9gQf8AQS1b/wADX/xrJ8J6
-ZrVjNdS6vNM6lFjtlluPMKoHc8gHbnBTnk8YzxXUZPrS52HKjIihbTtdtraO7up4bi3ldluJTJtK
-FMEE8j7xop1wc+KNP/69bj+cVFEtbMcdLouNY2ruztApZjljzyaT+z7T/ngv5n/Giip5n3HZB/Z9
-p/zwX8z/AI0f2faf88F/M/40UU+Z9wsuwf2faf8APBfzP+NH9n2n/PBfzP8AjRRRzPuFl2D+z7T/
-AJ4L+Z/xo/s+0/54L+Z/xooo5n3Cy7B/Z9p/zwX8z/jR/Z9p/wA8F/M/40UUcz7hZdg/s+0/54L+
-Z/xo/s+0/wCeC/mf8aKKOZ9wsuwf2faf88F/M/40f2faf88F/M/40UUcz7hZdg/s+0/54L+Z/wAa
-P7PtP+eC/mf8aKKOZ9wsuwf2faf88F/M/wCNH9n2n/PBfzP+NFFHM+4WXYP7PtP+eC/mf8aP7PtP
-+eC/mf8AGiijmfcLLsH9n2n/ADwX8z/jR/Z9p/zwX8z/AI0UUcz7hZdg/s+0/wCeC/mf8aP7PtP+
-eC/mf8aKKOZ9wsuwf2faf88F/M/40f2faf8APBfzP+NFFHM+4WXYP7PtP+eC/mf8aP7PtP8Angv5
-n/GiijmfcLLsH9n2n/PBfzP+NH9n2n/PBfzP+NFFHM+4WXYP7PtP+eC/mf8AGj+z7T/ngv5n/Gii
-jmfcLLsH9n2n/PBfzP8AjR/Z9p/zwX8z/jRRRzPuFl2D+z7T/ngv5n/Gj+z7T/ngv5n/ABooo5n3
-Cy7B/Z9p/wA8F/M/40XNhb3Vg1lImIGAG1DtK4OQQexBANFFK7CyKP8AYL/9BrVf+/kf/wAbo/sF
-v+g1qv8A33H/APG6KKfMxcqD+wW/6DWq/wDfcf8A8bo/sFv+gzqv/fyP/wCN0UUczDlQf2C3/QZ1
-X/v5H/8AG6P7Bb/oM6r/AN/I/wD43RRRzMOVE1lo8Vndm6a6urqfYY1a4dTsUkEgBQBzgflRRRSb
-uNKx/9m=
+/wAipF/10t//AEclNatX7ieidi7/AGBCODqerf8Aga9RXOlWVlay3Vzq+pxQRKXkke+cBVHUnmtZ
+idx571l+I7O41Hw3qNlajNxNAyRjcF+btyen1qedj5EQ2On6fqVt9os9Y1SaHJXct5JjI+tTPols
+jorapqwaRtqj7a/JwT/IGse603XL22gaOS8t5be1uBGst6pLzlkMTOU4YDDe3qDmmXGjeIkkka2v
+2lVJHjhSSdgGhMb8tzy+91AJ6bAfo+dhyI3v+Efg/wCglq3/AIGv/jSf2BB/0EtW/wDA1/8AGsnw
+lpmtWM11Lq80zqUWO2WW48wqgdzyAducFOeTxjPFdRk+tLnYcqMiKBtO122to7u6nhuLeV2W4lMm
+ChTBBPI+8aKdcHPijT/+vW4/nFRRLWzHHS6LjWNq7s7QKWY5Y88mk/s+z/54L+Z/xoopcz7jsg/s
++z/54L+Z/wAaP7Ps/wDngv5n/GiijmfcLLsH9n2f/PBfzP8AjR/Z9n/zwX8z/jRRRzPuFl2D+z7P
+/ngv5n/Gj+z7P/ngv5n/ABooo5n3Cy7B/Z9n/wA8F/M/40f2fZ/88F/M/wCNFFHM+4WXYP7Ps/8A
+ngv5n/Gj+z7P/ngv5n/GiijmfcLLsH9n2f8AzwX8z/jR/Z9n/wA8F/M/40UUcz7hZdg/s+z/AOeC
+/mf8aP7Ps/8Angv5n/GiijmfcLLsH9n2f/PBfzP+NH9n2f8AzwX8z/jRRRzPuFl2D+z7P/ngv5n/
+ABo/s+z/AOeC/mf8aKKOZ9wsuwf2fZ/88F/M/wCNH9n2f/PBfzP+NFFHM+4WXYP7Ps/+eC/mf8aP
+7Ps/+eC/mf8AGiijmfcLLsH9n2f/ADwX8z/jR/Z9n/zwX8z/AI0UUcz7hZdg/s+z/wCeC/mf8aP7
+Ps/+eC/mf8aKKOZ9wsuwf2fZ/wDPBfzP+NH9n2f/ADwX8z/jRRRzPuFl2D+z7P8A54L+Z/xo/s+z
+/wCeC/mf8aKKOZ9wsuwf2fZ/88F/M/40f2fZ/wDPBfzP+NFFHM+4WXYP7Ps/+eC/mf8AGj+z7P8A
+54L+Z/xooo5n3Cy7B/Z9n/zwX8z/AI0XNhb3Vg1lImIGAG1DtK4OQQexBANFFK7CyKP9gt/0GtV/
+7+R//EUf2C3/AEGdV/7+R/8AxuiinzMXKg/sFv8AoM6r/wB/I/8A43R/YLf9BnVf+/kf/wAbooo5
+mHKg/sFv+gzqv/fyP/43R/YLf9BnVf8Av5H/APG6KKOZhyomstHis7s3TXV1dT7DGrXDqdikgkAK
+AOcD8qKKKTdxpWP/2W==
 
-------=_NextPart_01CB8280.BB0E4350
-Content-Location: file:///C:/2048E08C/manual_arquivos/filelist.xml
+------=_NextPart_01CB8712.56EF5E40
+Content-Location: file:///C:/E048E08C/Manual_arquivos/filelist.xml
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/xml; charset="utf-8"
 
 <xml xmlns:o=3D"urn:schemas-microsoft-com:office:office">
- <o:MainFile HRef=3D"../manual.htm"/>
+ <o:MainFile HRef=3D"../Manual.htm"/>
  <o:File HRef=3D"image001.gif"/>
  <o:File HRef=3D"image002.png"/>
  <o:File HRef=3D"image003.jpg"/>
@@ -1756,4 +1867,4 @@ Content-Type: text/xml; charset="utf-8"
  <o:File HRef=3D"image006.jpg"/>
  <o:File HRef=3D"filelist.xml"/>
 </xml>
-------=_NextPart_01CB8280.BB0E4350--
+------=_NextPart_01CB8712.56EF5E40--

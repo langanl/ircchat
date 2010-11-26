@@ -96,6 +96,7 @@ object Form2: TForm2
         Left = 123
         Top = 2
         Action = ActOcultarTabControl
+        Style = tbsCheck
       end
     end
   end
@@ -116,8 +117,6 @@ object Form2: TForm2
         Width = 604
         Height = 257
         Align = alClient
-        Lines.Strings = (
-          'RichEdit1')
         ScrollBars = ssVertical
         TabOrder = 0
       end
