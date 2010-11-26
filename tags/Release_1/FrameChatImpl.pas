@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, ComCtrls, StdCtrls, ExtCtrls, Buttons;
+  Dialogs, ComCtrls, StdCtrls, ExtCtrls;
 
 type
   TFrameChat = class(TFrame)

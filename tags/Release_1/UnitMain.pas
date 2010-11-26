@@ -235,6 +235,8 @@ end;
 
 procedure TForm2.Nick(NickName: string);
 begin
+  IdIrc1.Nickname := NickName;
+  IdIRC1.AltNickname := NickName;
   IdIRC1.Raw(format('NICK %s', [NickName]));
 end;
 
@@ -244,7 +246,7 @@ begin
 
   ActConectar.Enabled := False;
   ActDisconectar.Enabled := True;
-  ListBox1.Enabled := True;
+//ListBox1.Enabled := True;
   Timer1.Enabled := True;
 end;
 
@@ -264,7 +266,7 @@ begin
   LogControle('>>Usuário ' + ANickname + ' conectou-se');
 
   //se for meu nome, avisa que estou no canal.
-  if Pos(ANickname, IdIRC1.Nickname) > 0 then
+  if Pos(ANickname, Users[NickIdx]) > 0 then
   begin
     FInChannel := True;
     StatusBar1.Panels[0].Text :=
@@ -310,6 +312,7 @@ begin
     end;
 
     Nick(Users[NickIdx]);
+
   end;
 
   //lista de usuarios
@@ -600,7 +603,9 @@ begin
   //Botões
   ActConectar.Enabled := True;
   ActDisconectar.Enabled := False;
-  ListBox1.Enabled := False;
+
+  //...
+  //ListBox1.Enabled := False;
 end;
 
 procedure TForm2.ActDisconectarExecute(Sender: TObject);
@@ -657,4 +662,5 @@ end.
 //  LogRecebidas.SelAttributes.Style := [fsBold];
 //  LogRecebidas.Lines.Add(Format('<%s> [%s]: %s',[IdIRC1.RealName,ANickFrom, AMessage]));
 //  LogRecebidas.SelAttributes.Color := clBtnText;
+
 
