@@ -81,6 +81,10 @@ type
     procedure ActFecharTabHint(var HintStr: string; var CanShow: Boolean);
     procedure ActFecharTabExecute(Sender: TObject);
     procedure ActManualExecute(Sender: TObject);
+    procedure IdIRC1NicknameError(ASender: TIdContext; AError: Integer);
+    procedure IdIRC1NicknameChange(ASender: TIdContext; const AOldNickname,
+      AHost, ANewNickname: string);
+    procedure FrameChat1FrameButtonClick(Sender: TObject);
   private
     { Private declarations }
     FInChannel: Boolean;
@@ -99,6 +103,7 @@ type
     function GetTabPage(ANickFrom, ANickTo: string): TTabSheet;
     function WaitFor(var BoolVar: Boolean; Timeout: Cardinal = 5): Boolean;
     procedure LogControle(s: string);
+    function ClearedNick(ANick: string): string;
   public
     { Public declarations }
     procedure Say(ATarget, Texto: string);
@@ -142,15 +147,16 @@ end;
 
 procedure TForm2.Conectar;
 begin
+  LogControle('Inicio Conectar');
   FInChannel := False;
   ConfiguraIRC();
   NickIdx := Users.Count - 1;
   IdIrc1.Nickname := Users[NickIdx];
-  IdIRC1.AltNickname := Users[NickIdx];
+  IdIRC1.AltNickname := ''; //Users[NickIdx-1];
 
   if NickIdx < 0 then
   begin
-    ShowMessage('Não existem usuarios disponíveis para interação.' + #10 +
+    ShowMessage('Erro ao conectar. Não existem usuarios disponíveis para interação.' + #10 +
       'Tente novamente mais tarde.');
     exit;
   end;
@@ -165,6 +171,7 @@ begin
       Exit;
     end;
   end;
+  LogControle('Termino Conectar');
 end;
 
 procedure TForm2.FormCreate(Sender: TObject);
@@ -204,6 +211,7 @@ var
   old: boolean;
   CfgFile: string;
 begin
+  LogControle('Incia Config');
   old := Timer1.Enabled;
   Timer1.Enabled := False;
   CfgFile := ExtractFilePath(ParamStr(0)) + '\config.ini';
@@ -211,7 +219,7 @@ begin
   Result := False;
   if not FileExists(cfgFile) then
   begin
-    ActManual.Execute();  
+    ActManual.Execute();
     Exit;
   end;
 
@@ -231,13 +239,16 @@ begin
     Result := True;
   end;
   Timer1.Enabled := old;
+  LogControle('Término Config');
 end;
 
 procedure TForm2.Nick(NickName: string);
 begin
+  LogControle('Inicio Nick');
   IdIrc1.Nickname := NickName;
-  IdIRC1.AltNickname := NickName;
-  IdIRC1.Raw(format('NICK %s', [NickName]));
+  IdIRC1.AltNickname := '';
+  //IdIRC1.Raw(format('NICK %s', [NickName]));
+  LogControle('Termino Nick');
 end;
 
 procedure TForm2.IdIRC1Connected(Sender: TObject);
@@ -270,14 +281,15 @@ begin
   begin
     FInChannel := True;
     StatusBar1.Panels[0].Text :=
-      Format('Conectado como %s em %s : %d - [%s]',
-      [ANickname, IdIRC1.Host, IdIRC1.Port, IdIRC1.RealName]); ;
+      Format('Conectado como %s em %s : %d',
+      [IdIRC1.RealName, IdIRC1.Host, IdIRC1.Port]); ;
     PageControl1.Pages[0].Caption := IRCChannel;
+    Nick(IdIRC1.RealName);
   end;
 
   //adiciona na lista caso não exista
   if not (ListBox1.Items.IndexOf(ANickname) > -1) then
-    ListBox1.Items.Add(ANickname);
+    listbox1.Items.Add(ANickName);
 
   ListBox1.Items.Text := Ordena(ListBox1.Items);
 end;
@@ -287,30 +299,37 @@ procedure TForm2.IdIRC1Raw(ASender: TIdContext; AIn: Boolean;
   function ParseNames(s: string): string;
   var
     Lista: TStrings;
+    i: Integer;
   begin
     Lista := TStringList.Create();
     Lista.Delimiter := ' ';
-    Lista.CommaText := Copy(s, pos(':', s) + 1, Length(s));
+    Lista.CommaText := Copy(s, Pos(':', s) + 1, Length(s));
+    for i := 0 to Lista.Count - 1 do
+      Lista[i] := ClearedNick(Lista[i]);
+
     Result := Lista.Text;
   end;
 
 var
   oldDest: string;
+  Msg: string;
 begin
   LogControle('OnRaw: ' + AMessage);
 
   //User in uso, tenta alterar nick
   if Copy(AMessage, 1, 3) = '433' then
   begin
+    FrameChat1.FrameMsg.lines.add(Users[NickIdx] + ' em uso');
     Dec(NickIdx);
     if NickIdx < 0 then
     begin
-      ShowMessage('Não existem usuarios disponíveis para interação.' + #10 +
-        'Tente novamente mais tarde.');
+      Msg := 'Não existem usuarios disponíveis para interação.' + #10 +
+        'Tente novamente mais tarde.';
+      FrameChat1.FrameMsg.lines.add(msg);
       IdIRC1.Disconnect();
+      ShowMessage(msg);
       Exit;
     end;
-
     Nick(Users[NickIdx]);
 
   end;
@@ -329,6 +348,8 @@ begin
 
     TFrameChat(TabPublico.Controls[0]).AddMessage(oldDest, clRed);
   end;
+  SendMessage(FrameChat1.FrameMsg.Handle, EM_SCROLLCARET, 0, 0);
+
 end;
 
 procedure TForm2.Identify(Password: string);
@@ -359,7 +380,7 @@ begin
   if Pos('IDENTIFY Password accepted', ANotice) > 0 then
     Join(IRCChannel);
 
-  LogControle('OnNotice' + #13 + 'nick:' + ANicknameFrom + ' host:' + AHost +
+  LogControle('OnNotice:' + #10 + 'nick:' + ANicknameFrom + ' host:' + AHost +
     ' to:' + ANicknameTo + ' notice:' + ANotice);
 
 end;
@@ -412,7 +433,6 @@ begin
   end;
 end;
 
-
 procedure TForm2.Say(ATarget, Texto: string);
 var
   AMsg: string;
@@ -449,22 +469,21 @@ begin
   if ATarget = '' then
     ATarget := '#' + IRCChannel;
 
-  ATarget := StringReplace(ATarget, '@', '', [rfReplaceAll]);
-  ATarget := StringReplace(ATarget, '+', '', [rfReplaceAll]);
+  ATarget := ClearedNick(ATarget);
   AMsg := StringReplace(AMsg, #13, '', [rfReplaceAll]);
   AMsg := StringReplace(AMsg, #10, ' ', [rfReplaceAll]);
-  AMsg := Format('[%s] %s', [IdIRC1.RealName, Texto]);
-
-  Msg := Format('PRIVMSG %s :%s', [ATarget, AMsg]);
+  //AMsg := Format('[%s] %s', [IdIRC1.RealName, Texto]);
+  Msg := Format('PRIVMSG %s :%s', [ATarget, Texto]);
   IdIRC1.Raw(Msg);
-
+  //é publico?
   if Pos(IRCChannel, ATarget) > 0 then
-    FrameChat1.AddMessage(AMsg)
+    FrameChat1.AddMessage(Format('<%s>: %s',[IdIRC1.RealName, Texto]))
   else
   begin
     GetFrame(ATarget, '').
       AddMessage(
-      Format('[%s] <%s>: %s', [IdIRC1.RealName, ATarget, Texto])
+      //Format('[%s] <%s>: %s', [IdIRC1.RealName, ATarget, Texto])
+      Format('<%s>: %s',[IdIRC1.RealName, Texto])
       );
   end;
 end;
@@ -475,10 +494,7 @@ var
   Frame: TFrameChat;
   ATarget: string;
 begin
-  ATarget := ListBox1.Items[ListBox1.itemindex];
-  ATarget := StringReplace(ATarget, '@', '', [rfReplaceAll]);
-  ATarget := StringReplace(ATarget, '+', '', [rfReplaceAll]);
-
+  ATarget := ListBox1.Items[ListBox1.ItemIndex];
   Frame := GetFrame(ATarget, '');
   Page := TTabSheet(Frame.Parent);
   PageControl1.ActivePage := Page;
@@ -510,8 +526,8 @@ begin
       FrameChat1.AddMessage(
         Format('Usuario <%s> enviou uma mensagem Particular:', [ANicknameFrom]), clRed);
       FrameChat1.AddMessage(
-        Format('Mensagem: %s', [AMessage]), clRed);
-      FrameChat1.AddMessage('Clique duas vezes sobre este usuario para iniciar uma conversa Privada!', clRed);
+        Format('Mensagem: "%s"', [AMessage]), clRed);
+      FrameChat1.AddMessage('Clique duas vezes sobre este usuario para iniciar uma conversa Particular!', clRed);
     end;
   end;
   Application.ProcessMessages;
@@ -621,6 +637,8 @@ end;
 procedure TForm2.ActOcultarTabControlExecute(Sender: TObject);
 begin
   TabControle.TabVisible := not TabControle.TabVisible;
+  if TabControle.TabVisible then
+    PageControl1.ActivePage := TabControle;
 end;
 
 procedure TForm2.ActFecharTabHint(var HintStr: string; var CanShow: Boolean);
@@ -656,11 +674,51 @@ begin
     ShowMessage('Arquivo "manual.mht" não encontrado!');
 end;
 
+procedure TForm2.IdIRC1NicknameError(ASender: TIdContext; AError: Integer);
+begin
+  LogControle('Erro de Nick: #' + IntToStr(AError));
+end;
+
+procedure TForm2.IdIRC1NicknameChange(ASender: TIdContext;
+  const AOldNickname, AHost, ANewNickname: string);
+var
+  Idx: integer;
+
+begin
+
+  //retira da lista caso exista.
+  Idx := ListBox1.Items.IndexOf(AOldNickname);
+{  Idx := -1;
+  for i := 0 to Listbox1.Count - 1 do
+    if SameText(ListBox1.Items.Values[ListBox1.Items[i]], AOldNickname) then
+    begin
+      Idx := i;
+      break;
+    end;
+ }
+  if idx > -1 then
+  begin
+    ListBox1.Items[Idx] := ANewNickname;
+    LogControle('<<Usuário ' + AOldNickname + ' alterou o nick para: ' + ANewNickname);
+  end;
+end;
+
+function TForm2.ClearedNick(ANick: string): string;
+begin
+  Result := ANick;
+  Result := StringReplace(Result, '@', '', [rfReplaceAll]);
+  Result := StringReplace(Result, '+', '', [rfReplaceAll]);
+end;
+
+procedure TForm2.FrameChat1FrameButtonClick(Sender: TObject);
+begin
+  FrameChat1.FrameButtonClick(Sender);
+end;
+
 end.
 
 //  TFrameChat(TabPublico.Controls[0]).AddMessage(oldDest);
 //  LogRecebidas.SelAttributes.Style := [fsBold];
 //  LogRecebidas.Lines.Add(Format('<%s> [%s]: %s',[IdIRC1.RealName,ANickFrom, AMessage]));
 //  LogRecebidas.SelAttributes.Color := clBtnText;
-
 
