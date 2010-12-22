@@ -16,6 +16,7 @@ type
     procedure FrameEditKeyPress(Sender: TObject; var Key: Char);
     procedure FrameEditKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FrameMsgChange(Sender: TObject);
   private
     { Private declarations }
     FFrom: string;
@@ -120,6 +121,11 @@ end;
 procedure TFrameChat.AddMessage(AText: string);
 begin
   AddMessage(AText, clBtnText);
+end;
+
+procedure TFrameChat.FrameMsgChange(Sender: TObject);
+begin
+  SendMessage(FrameMsg.Handle, EM_SCROLLCARET, 0, 0);
 end;
 
 end.
